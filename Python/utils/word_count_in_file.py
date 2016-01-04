@@ -1,19 +1,22 @@
 import time
 from collections import Counter
 
-cnt = Counter()
+def count():
+    cnt = Counter()
 
-print("start..")
-before = time.time()
-with open('input.txt', 'r') as rf:
-    for line in rf:
-        for word in line.split(' '):
-            cnt[word] += 1
+    print("start..")
+    before = time.time()
+    with open('input.txt', 'r') as rf:
+        for line in rf:
+            for word in line.split(' '):
+                cnt[word] += 1
 
-with open('output.txt', 'w') as wf:
-    for k, v in cnt.most_common():
-        wf.write("{} {}\n".format(k, v))
+    with open('output.txt', 'w') as wf:
+        for k, v in cnt.most_common():
+            wf.write("{} {}\n".format(k, v))
 
-after = time.time()
+    after = time.time()
+    print("done... elapse time: " + str(after-before) + " sec")
 
-print("done... elapse time: " + str(after-before) + " sec")
+if __name__ == "__main__":
+    count()

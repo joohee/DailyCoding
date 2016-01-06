@@ -8,11 +8,11 @@ def check_usage(target_name, percent):
         name = line[0]
         if name == target_name:
             print ("target: " + str(line))
+            executed = True
             usage = line[4]
             usage_value = int(usage[:len(usage)-1])
             if (usage_value > percent):
                     print("too much consumed!")
-                    execute = True
 
     if not executed:
         print("There's no device named: {}".format(target_name))

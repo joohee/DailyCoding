@@ -4,22 +4,31 @@ import os
 import re
 import configparser
 from optparse import OptionParser
+import validators
 
+def validate_url(url):
+	return validators.url(url)
+		
 def get_text(url):
-    #TODO validate 
-    r = requests.post(url)
-    if r.status_code == 200:
-        return r.text
+	if validate_url(url):
+		r = requests.post(url)
+    	if r.status_code == 200:
+        	return r.text
+		else return None
     else:
+		print ('url is invalid...')	
         return None
 
 def get_content(url):
-    #TODO validate 
-    r = requests.post(url)
-    if r.status_code == 200:
-        return r.content
-    else:
-        return None
+	if validate_url(url):
+    	r = requests.post(url)
+    	if r.status_code == 200:
+        	return r.content
+    	else:
+        	return None
+	else:
+		print ('url is invalid...')	
+		return None
 
 def get_from_config(key):
     cfg = configparser.ConfigParser()

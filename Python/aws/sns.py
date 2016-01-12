@@ -64,6 +64,7 @@ response = client.publish(
         Message=message,
         MessageStructure='json'
 )
+
 print (response)
 
 client.delete_endpoint(

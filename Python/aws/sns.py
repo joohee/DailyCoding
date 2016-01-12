@@ -1,6 +1,7 @@
 import boto3
 import os
 import configparser 
+import json
 
 key_path = os.path.abspath('apns_dis_key.pem')
 cer_path = os.path.abspath('apns_dis_cer.pem')
@@ -26,7 +27,7 @@ if config.sections() != None:
         raise
 
 responseGCM = client.create_platform_application(
-    Name = "pythontest",
+    Name = "platformForGCM",
     Platform = "GCM", 
     Attributes = {
         "PlatformCredential": server_key,
@@ -34,15 +35,53 @@ responseGCM = client.create_platform_application(
     }
 )
 print(responseGCM)
+print("PlatformApplicationArn: {}".format(responseGCM['PlatformApplicationArn']))
 
+platform_application_arn = responseGCM['PlatformApplicationArn']
+
+registrationId='cZ31Jt3jUOk:APA91bEwJc_NZx0ol1XWCXl-lIRih1hYGgdtBpyDQsxmB-vAM812ETuQOawsDVHQH0Osp9lIWhwbdWMakp6FnsNRZIPvhDauEvmyQ0PGT1-8oPRXzHPvSkJAgxAI751DvILPfx3QuN0N'
+
+platformEndpoint = client.create_platform_endpoint(
+        PlatformApplicationArn=platform_application_arn,
+        Token=registrationId,
+        CustomUserData='',
+        Attributes = {
+        }
+)
+
+print(platformEndpoint)
+endpointArn = platformEndpoint['EndpointArn']
+print ("endpoint: {}".format(endpointArn))
+
+#message = '{GCM:{"collapse_key":"Welcome","data":{"badge":"3","alert":"[Hotzil] message","type":"update"},"delay_while_idle":"true","time_to_live":"125","dry_run":"false"}}'
+#message = '{GCM:{"collapse_key":"Welcome","data":{"badge":"3","alert":"[Hotzil] message","type":"update"},"delay_while_idle":"true","time_to_live":"125","dry_run":"false"}}'
+#message = {GCM:{collapse_key:Welcome,data:{badge:3,alert:\'[Hotzil] message\',type:update},delay_while_idle:true,time_to_live:125,dry_run:false}}
+message = '{"GCM":"{\"collapse_key\":\"Welcome\",\"data\":{\"badge\":3,\"alert\":\"[Hotzil] message\",\"type\":\"update\"},\"delay_while_idle\":true,\"time_to_live\":125,\"dry_run\":false}"}'
+
+response = client.publish(
+        TargetArn=endpointArn,
+        #Message=json.loads(message),
+        Message=message,
+        MessageStructure='json'
+)
+print (response)
+
+client.delete_endpoint(
+        endpointArn=endpointArn
+        )
+
+
+
+
+### apns
 apns_attributes = {
-        "PlatformPrincipal": cer_str,
-        "PlatformCredential": key_str
+        "PlatformCredential": key_str,
+        "PlatformPrincipal": cer_str
 }
-print (cer_str + "---------")
-print (key_str + "---------")
+#print (key_str + "---------")
+#print (cer_str + "---------")
 responseAPNS = client.create_platform_application(
-    Name = 'pythontest',
+    Name = 'platformForIOS',
     Platform = 'APNS',
     Attributes = apns_attributes 
 )

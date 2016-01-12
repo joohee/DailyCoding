@@ -14,7 +14,6 @@ cer_str = cer.read()
 
 client = boto3.client('sns')
 
-
 config = configparser.ConfigParser()
 config.read('sns_config.ini')
 server_key = None

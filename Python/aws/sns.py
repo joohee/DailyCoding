@@ -4,7 +4,7 @@ import configparser
 import json
 
 # todo : message invisible in app. check it.
-def get_push_message():
+def get_push_message_gcm():
     # publish
     dData = {}
     dData['badge'] = 1
@@ -29,16 +29,17 @@ def get_push_message():
     return message
 
 def get_push_message_apns():
+    message = {}
+    message['default'] = 'default message'
+
     dData = {}
     dData['badge'] = 1
-    dData['alert'] = 'alert'
+    dData['alert'] = 'alert message from APNS'
     dData['type'] = 'update'
+    dData['sound'] = 'default'
     dAPNS = {}
-    dAPNS['sound'] = 'default'
     dAPNS['aps'] = dData
-    message = {}
     message['APNS'] = dAPNS
-    message['default'] = 'default message'
 
     try:
         print("*** valud! {}".format(json.dumps(message)))
@@ -93,15 +94,23 @@ def delete_platform_application(client, platformApplicationArn):
     return deletedPlatformApplication
 
 def push_apns(client):
+    try:
+        key_path = os.path.abspath('hotzil_dis_key.pem')
+        cer_path = os.path.abspath('hotzil_dis_cer.pem')
 
-    key_path = os.path.abspath('hotzil_dis_key.pem')
-    cer_path = os.path.abspath('hotzil_dis_cer.pem')
-
-    key = open(key_path, 'r')
-    cer = open(cer_path, 'r')
+        key = open(key_path, 'r')
+        cer = open(cer_path, 'r')
+    except FileNotFoundError:
+        print("please check if file is exist")
+        #raise
 
     key_str = key.read()
     cer_str = cer.read()
+
+    if key_str == '' or cer_str == '':
+        print('key file or cer file is invalid...')
+        return
+        #raise
 
     ### apns
     apns_attributes = {
@@ -110,11 +119,12 @@ def push_apns(client):
     }
     #print (key_str + "---------")
     #print (cer_str + "---------")
+    pushToken = input('please insert your pushToken of iOS: ')
+
     platform = 'APNS'
     responseAPNS = create_platform_application(client, platform, key_str, cer_str)
     print ("APNS: {}".format(responseAPNS))
 
-    pushToken = input('please insert your pushToken of iOS: ')
     platformApplicationArn = responseAPNS['PlatformApplicationArn']
     platformEndpoint = create_endpoint(client, platformApplicationArn, pushToken)
 
@@ -132,6 +142,7 @@ def push_apns(client):
     print("delete platform application: {}".format(deletedPlatformApplication))
 
 def push_gcm(client):
+
     config = configparser.ConfigParser()
     config.read('sns_config.ini')
     server_key = None
@@ -152,7 +163,7 @@ def push_gcm(client):
     endpointArn = platformEndpoint['EndpointArn']
     print ("endpoint: {}".format(endpointArn))
 
-    message = get_push_message()
+    message = get_push_message_gcm()
     response = publish(client, endpointArn, message)
     print ("published: {}".format(response))
 

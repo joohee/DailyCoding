@@ -6,3 +6,15 @@ This directory is for pythong programming.
 - utils : some utils to help your programming.
 - aws : functions related with AWS.
 - book : functions related with BOOK db (search, ...)
+
+```
+├── aws
+│   └── sns.py : send push notification using AWS SNS.
+├── book
+│   └── search_by_isbn13.py : search BOOK by isbn no. (API server is from Daum.)
+└── utils
+    ├── crawl_from_url_and_save_to_file.py : find file from url and save to the directory.
+    ├── crawl_with_options.py : used python option parameters.
+    ├── df.py : *nix command df parser. 
+    └── word_count_in_file.py : word count of a specific file. 
+```

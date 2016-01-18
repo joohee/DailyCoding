@@ -1,6 +1,6 @@
 import os
 
-def check_usage(target_name, percent):
+def check_usage_is_over(target_name, percent):
     df_output_lines = [s.split() for s in os.popen('df -Ph').read().splitlines()]
 
     executed = False
@@ -13,12 +13,17 @@ def check_usage(target_name, percent):
             usage_value = int(usage[:len(usage)-1])
             if (usage_value > percent):
                     print("too much consumed!")
-
+                    return True
+            else:
+                print("disk space is OK")
+                return False
+        
     if not executed:
         print("There's no device named: {}".format(target_name))
+        return False
 
 if __name__ == '__main__':
     target_name = input("insert name: ") 
     percent = input("insert percent value: ")
     
-    check_usage(target_name, int(percent))
+    check_usage_is_over(target_name, int(percent))

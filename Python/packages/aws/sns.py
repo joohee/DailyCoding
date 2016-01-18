@@ -17,7 +17,7 @@ def get_push_message_gcm():
     dGCM['time_to_live'] = 125
     dGCM['dry_run'] = 'false'
     message = {}
-    message['GCM'] = dGCM
+    message['GCM'] = json.dumps(dGCM)
     message['default'] = 'default message'
 
     try:
@@ -39,7 +39,7 @@ def get_push_message_apns():
     dData['sound'] = 'default'
     dAPNS = {}
     dAPNS['aps'] = dData
-    message['APNS'] = dAPNS
+    message['APNS'] = json.dumps(dAPNS)
 
     try:
         print("*** valud! {}".format(json.dumps(message)))
@@ -75,9 +75,9 @@ def create_endpoint(client, platformApplicationArn, pushToken):
 
 def publish(client, endpointArn, message):
     response = client.publish(
-        TargetArn=endpointArn,
+        MessageStructure='json',
         Message=json.dumps(message),
-        MessageStructure='json'
+        TargetArn=endpointArn
     )
     return response
 
@@ -93,23 +93,27 @@ def delete_platform_application(client, platformApplicationArn):
     )
     return deletedPlatformApplication
 
-def push_apns(client):
+def push_apns(client, pushToken):
+    key_str = ''
+    cer_str = ''
+
     try:
-        key_path = os.path.abspath('hotzil_dis_key.pem')
-        cer_path = os.path.abspath('hotzil_dis_cer.pem')
+        dir_name = os.path.dirname(__file__)
+        key_path = os.path.abspath(os.path.join(dir_name, 'hotzil_dis_key.pem'))
+        cer_path = os.path.abspath(os.path.join(dir_name, 'hotzil_dis_cer.pem'))
 
         key = open(key_path, 'r')
         cer = open(cer_path, 'r')
+
+        key_str = key.read()
+        cer_str = cer.read()
+
+        if key_str == '' or cer_str == '':
+            print('key file or cer file is invalid...')
+            return
+
     except FileNotFoundError:
         print("please check if file is exist")
-        #raise
-
-    key_str = key.read()
-    cer_str = cer.read()
-
-    if key_str == '' or cer_str == '':
-        print('key file or cer file is invalid...')
-        return
         #raise
 
     ### apns
@@ -119,7 +123,6 @@ def push_apns(client):
     }
     #print (key_str + "---------")
     #print (cer_str + "---------")
-    pushToken = input('please insert your pushToken of iOS: ')
 
     platform = 'APNS'
     responseAPNS = create_platform_application(client, platform, key_str, cer_str)
@@ -141,20 +144,20 @@ def push_apns(client):
     deletedPlatformApplication = delete_platform_application(client, platformApplicationArn)
     print("delete platform application: {}".format(deletedPlatformApplication))
 
-def push_gcm(client):
+def push_gcm(client, registrationId):
 
     config = configparser.ConfigParser()
-    config.read('sns_config.ini')
+    config.read(os.path.abspath(os.path.join(os.path.dirname(__file__), 'sns_config.ini')))
     server_key = None
 
     if config.sections() != None:
         try:
             server_key = config.get('sns', 'serverKey')
+            print("serverKey: {}".format(server_key))
         except:
             print("there's no serverKey to create GCM application")
             raise
 
-    registrationId = input('please insert your registrationId: ')
     responseGCM = create_platform_application(client, 'GCM', server_key, '')
     print("PlatformApplicationArn: {}".format(responseGCM['PlatformApplicationArn']))
 
@@ -176,7 +179,8 @@ def push_gcm(client):
 if __name__ == "__main__":
     client = boto3.client('sns')
     selected = input("please insert your choice: (1 - GCM, 2 - APNS) ")
+    pushToken = input('please insert your pushToken: ')
     if selected == '2':
-        push_apns(client)
+        push_apns(client, pushToken)
     else:
-        push_gcm(client)
+        push_gcm(client, pushToken)

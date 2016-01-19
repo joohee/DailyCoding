@@ -34,7 +34,7 @@ if result == True:
 
         client = boto3.client('sns')
         sns = SNSObject()
-        message_format = '{}의 [{}] 공간이 {}% 를 초과하였습니다. 체크하시길 바랍니다.'
+        message_format = '{}의 [{}] 공간 사용량이 {}% 를 초과하였습니다. 체크하시길 바랍니다.'
         message = message_format.format(instance_name, disk_name, usage_limit)
 
         for line in push_tokens:

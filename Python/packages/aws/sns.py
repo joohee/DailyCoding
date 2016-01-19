@@ -7,52 +7,56 @@ class SNSObject:
 
     def __init__(self):
         self.client = boto3.client('sns')
+        self.default_message = 'default message'
 
     # todo : message invisible in app. check it.
-    def get_push_message_gcm(self):
+    def get_push_message_gcm(self, msg):
+        text = msg if msg != None else self.default_message
 	    # publish
-	    dData = {}
-	    dData['badge'] = 1
-	    dData['alert'] = 'alert'
-	    dData['type'] = 'update'
-	    dGCM = {}
-	    dGCM['data'] = dData
-	    dGCM['collapse_key'] = 'Welcome'
-	    dGCM['delay_while_idle'] = 'true'
-	    dGCM['time_to_live'] = 125
-	    dGCM['dry_run'] = 'false'
-	    message = {}
-	    message['GCM'] = json.dumps(dGCM)
-	    message['default'] = 'default message'
+        dData = {}
+        dData['badge'] = 1
+        dData['alert'] = text
+        dData['type'] = 'update'
+        dGCM = {}
+        dGCM['data'] = dData
+        dGCM['collapse_key'] = 'Welcome'
+        dGCM['delay_while_idle'] = 'true'
+        dGCM['time_to_live'] = 125
+        dGCM['dry_run'] = 'false'
+        message = {}
+        message['GCM'] = json.dumps(dGCM)
+        message['default'] = 'default message'
 	
-	    try:
-	        print("*** valid! {}".format(json.dumps(message)))
-	    except ValueError:
-	        print("*** invalid!")
-	        raise
+        try:
+            print("*** valid! {}".format(json.dumps(message)))
+        except ValueError:
+            print("*** invalid!")
+            raise
 	
-	    return message
+        return message
 
-    def get_push_message_apns(self):
-	    message = {}
-	    message['default'] = 'default message'
+    def get_push_message_apns(self, msg):
+        text = msg if msg != None else self.default_message
+
+        message = {}
+        message['default'] = self.default_message
 	
-	    dData = {}
-	    dData['badge'] = 1
-	    dData['alert'] = 'alert message from APNS'
-	    dData['type'] = 'update'
-	    dData['sound'] = 'default'
-	    dAPNS = {}
-	    dAPNS['aps'] = dData
-	    message['APNS'] = json.dumps(dAPNS)
+        dData = {}
+        dData['badge'] = 1
+        dData['alert'] = text
+        dData['type'] = 'update'
+        dData['sound'] = 'default'
+        dAPNS = {}
+        dAPNS['aps'] = dData
+        message['APNS'] = json.dumps(dAPNS)
 	
-	    try:
-	        print("*** valid! {}".format(json.dumps(message)))
-	    except ValueError:
-	        print("*** invalid!")
-	        raise
+        try:
+            print("*** valid! {}".format(json.dumps(message)))
+        except ValueError:
+            print("*** invalid!")
+            raise
 	
-	    return message
+        return message
 	
     def create_platform_application(self, client, platform, key, cer):
 	    apns_attributes = {
@@ -97,8 +101,8 @@ class SNSObject:
 	        PlatformApplicationArn=platformApplicationArn
 	    )
 	    return deletedPlatformApplication
-	
-    def push_apns(self, client, pushToken):
+
+    def push_apns(self, client, pushToken, message=None):
 	    key_str = ''
 	    cer_str = ''
 	
@@ -139,8 +143,8 @@ class SNSObject:
 	    endpointArn = platformEndpoint['EndpointArn']
 	    print ("endpoint: {}".format(endpointArn))
 	
-	    message = self.get_push_message_apns()
-	    response = self.publish(client, endpointArn, message)
+	    msg = self.get_push_message_apns(message)
+	    response = self.publish(client, endpointArn, msg)
 	    print ("published: {}".format(response))
 	
 	    deletedEndpoint = self.delete_endpoint(client, endpointArn)
@@ -149,7 +153,7 @@ class SNSObject:
 	    deletedPlatformApplication = self.delete_platform_application(client, platformApplicationArn)
 	    print("delete platform application: {}".format(deletedPlatformApplication))
 	
-    def push_gcm(self, client, registrationId):
+    def push_gcm(self, client, registrationId, message=None):
 	
         config = configparser.ConfigParser()
         config.read(os.path.abspath(os.path.join(os.path.dirname(__file__), 'sns_config.ini')))
@@ -171,8 +175,8 @@ class SNSObject:
         endpointArn = platformEndpoint['EndpointArn']
         print ("endpoint: {}".format(endpointArn))
 	
-        message = self.get_push_message_gcm()
-        response = self.publish(client, endpointArn, message)
+        msg = self.get_push_message_gcm(message)
+        response = self.publish(client, endpointArn, msg)
         print ("published: {}".format(response))
 	
         deletedEndpoint = self.delete_endpoint(client, endpointArn)
@@ -186,7 +190,15 @@ if __name__ == "__main__":
     client = boto3.client('sns')
     selected = input("please insert your choice: (1 - GCM, 2 - APNS) ")
     pushToken = input('please insert your pushToken: ')
+    message = input('please insert message. if you don\'t insert it, you\'ll get the default message: ')
+
     if selected == '2':
-        sns.push_apns(client, pushToken)
+        if len(message) > 0:
+            sns.push_apns(client, pushToken, message)
+        else:
+            sns.push_apns(client, pushToken)
     else:
-        sns.push_gcm(client, pushToken)
+        if len(message) > 0:
+            sns.push_gcm(client, pushToken, message)
+        else:
+            sns.push_gcm(client, pushToken)

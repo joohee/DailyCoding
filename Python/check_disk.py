@@ -30,7 +30,7 @@ def check():
 
     if result == True:
         try:
-            f = open('push_tokens.file', 'r')
+            f = open(os.path.join(os.path.dirname(__file__), 'push_tokens.file'), 'r')
             push_tokens = [s.split() for s in f.read().splitlines()]
 
             client = boto3.client('sns')

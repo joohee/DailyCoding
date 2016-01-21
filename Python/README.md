@@ -8,8 +8,7 @@ This directory is for pythong programming.
 - book : functions related with BOOK db (search, ...)
 
 ```
-├── __pycache__
-├── check_disk.py
+├── check_disk.py : check disk storage and send a push notification if usage is larger than usage_limit.
 ├── packages
 │   ├── __init__.py
 │   ├── aws

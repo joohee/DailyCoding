@@ -143,8 +143,8 @@ class SNSObject:
             "PlatformCredential": key_str,
             "PlatformPrincipal": cer_str
         }
-        print (key_str + "---------")
-        print (cer_str + "---------")
+        #print (key_str + "---------")
+        #print (cer_str + "---------")
     
         platform = 'APNS'
         responseAPNS = self.create_platform_application(client, platform, key_str, cer_str)

@@ -19,9 +19,9 @@ This directory is for pythong programming.
 │   │   ├── __init__.py
 │   │   └── search_by_isbn13.py : search a BOOK by isbn no. (API server is from Daum.)
 │   └── utils
-│       ├── __init__.py
-├── crawl_from_url_and_save_to_file.py : find file from url and save to the directory.
-    ├── crawl_with_options.py : used python option parameters.
-    ├── df.py : *nix command df parser. 
-    └── word_count_in_file.py : word count of a specific file. 
+│   │   ├── __init__.py
+│   │   ├── crawl_from_url_and_save_to_file.py : find file from url and save to the directory.
+│   │   ├── crawl_with_options.py : used python option parameters.
+│   │   ├── df.py : *nix command df parser. 
+│   │   └── word_count_in_file.py : word count of a specific file. 
 ```

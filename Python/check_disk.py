@@ -28,9 +28,11 @@ def check():
     result = storage.check_usage_is_over(disk_name, int(usage_limit))
     print("result: {}".format(result))
 
+    push_token_filename=''
     if result == True:
         try:
-            f = open(os.path.join(os.path.dirname(__file__), 'push_tokens.file'), 'r')
+            push_token_filename = config['storage']['push_token_filename']
+            f = open(os.path.join(os.path.dirname(__file__), push_token_filename), 'r')
             push_tokens = [s.split() for s in f.read().splitlines()]
 
             client = boto3.client('sns')

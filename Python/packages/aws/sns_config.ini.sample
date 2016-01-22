@@ -1,0 +1,5 @@
+[sns]
+serverKey=Your Server Key For GCM
+apns_cer_filename=Your APNS Cer filename
+apns_key_filename=Your APNS Key filename
+

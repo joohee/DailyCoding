@@ -1,0 +1,4 @@
+# separated by tab 
+APNS_pushToken    I
+GCM_registrationId  A
+

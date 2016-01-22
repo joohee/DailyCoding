@@ -1,0 +1,5 @@
+[storage]
+disk_name = Your disk name (df)
+usage_limit = Limit value you want.
+instance_name = Machine or Host name
+push_token_filename=File including Push Tokens

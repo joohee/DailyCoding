@@ -3,9 +3,10 @@
 This directory is for pythong programming. 
 
 ### Directories
-- utils : some utils to help your programming.
-- aws : functions related with AWS.
-- book : functions related with BOOK db (search, ...)
+- packages
+   - utils : some utils to help your programming.
+   - aws : functions related with AWS.
+   - book : functions related with BOOK db (search, ...)
 
 ```
 ├── check_disk.py : check disk storage and send a push notification if usage is larger than usage_limit.
@@ -23,4 +24,14 @@ This directory is for pythong programming.
 │   │   ├── crawl_with_options.py : used python option parameters.
 │   │   ├── df.py : *nix command df parser. 
 │   │   └── word_count_in_file.py : word count of a specific file. 
+```
+
+- test : test files with unittest lib.
+```
+├── unittest_basic.py
+├── unittest_expected_failure.py
+├── unittest_inner_functions.py
+├── unittest_sample.py
+├── unittest_skip.py
+└── unittest_subtest.py
 ```

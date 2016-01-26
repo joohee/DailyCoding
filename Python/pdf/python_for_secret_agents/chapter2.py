@@ -107,7 +107,44 @@ def example8():
         return weight
 
     print(sorted(year_cheese, key=by_weight))
- 
+
+def example9():
+    from collections import defaultdict
+    corpus_file = "/usr/share/dict/words"
+    digram_count = defaultdict(int)
+    with open(corpus_file) as corpus:
+        for line in corpus:
+            word = line.lower().strip()
+            for position in range(len(word)-1):
+                digram = word[position:position+2]
+                digram_count[digram] += 1
+
+    print(digram_count)
+
+def example10():
+    from collections import Counter
+    corpus_file = "/usr/share/dict/words"
+    digram_count = Counter()
+    with open(corpus_file) as corpus:
+        for line in corpus:
+            word = line.lower().strip()
+            for position in range(len(word)-1):
+                digram = word[position:position+2]
+                digram_count[digram] += 1
+
+    print(digram_count.most_common(10))
+
+def example11():
+    corpus_file = "/usr/share/dict/words"
+    hyphenated = set()
+    with open(corpus_file) as corpus:
+        for line in corpus:
+            word = line.lower().strip()
+            if '-' in word:
+                hyphenated.add(word)
+
+    print(hyphenated)
+
 if __name__ == "__main__":
     #example1()
     #example2()
@@ -116,4 +153,7 @@ if __name__ == "__main__":
     #example5()
     #example6()
     #example7()
-    example8()
+    #example8()
+    #example9()
+    #example10()
+    example11()

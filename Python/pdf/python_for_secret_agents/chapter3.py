@@ -33,8 +33,21 @@ def example3():
                 print(filename)
                 archive.extract(filename)
 
+def example4():
+    from PIL import Image
+    pix = Image.open("1drachmi_1973.jpg")
+    print(pix.info.keys())
+    exif = pix._getexif()
+    print(exif.keys())
+
+    import PIL.ExifTags
+    for k, v in pix._getexif().items():
+        print(PIL.ExifTags.TAGS[k], v)
+
+
 
 if __name__ == "__main__":
     #example1()
     #example2()
-    example3()
+    #example3()
+    example4()

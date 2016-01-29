@@ -44,10 +44,27 @@ def example4():
     for k, v in pix._getexif().items():
         print(PIL.ExifTags.TAGS[k], v)
 
+def example5():
+    from PIL import Image
+    import glob
+    import os
 
+    for filename in glob.glob("*.jpg"):
+        name, ext = os.path.splitext(filename)
+        if name.endswith("_thumb"):
+            continue
+        img = Image.open(filename)
+        thumb = img.copy()
+        w, h  = img.size
+        largest = max(w, h)
+        w_n, h_n = w * 128//largest, h*128//largest
+        print("Resize", filename, "from", w, h, "to", w_n, h_n)
+        thumb.thumbnail((w_n, h_n), Image.ANTIALIAS)
+        thumb.save(name+"_thumb"+ext)
 
 if __name__ == "__main__":
     #example1()
     #example2()
     #example3()
-    example4()
+    #example4()
+    example5()

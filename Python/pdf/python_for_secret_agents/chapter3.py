@@ -62,9 +62,37 @@ def example5():
         thumb.thumbnail((w_n, h_n), Image.ANTIALIAS)
         thumb.save(name+"_thumb"+ext)
 
+def example6():
+    from PIL import Image
+    from fractions import Fraction
+    ship = Image.open("IPhone_Internals.jpg")
+    w, h = ship.size
+    slices = 12 
+    print(range(slices+1))
+    box = [ Fraction(i, slices) for i in range(slices+1)]
+    print(box)
+
+    try:
+        for i in range(slices):
+            if i == slices:
+                break
+            for j in range(slices):
+                if j == slices:
+                    break
+                bounds = int(w*box[i]), int(h*box[j]), int(w*box[i+1]), int(h*box[j+i])
+                print(bounds)
+    except IndexError:
+        pass
+    
+    logo = ship.crop(bounds)
+    logo.show()
+    logo.save("IPhone_Internals_logo.jpg")
+    
+
 if __name__ == "__main__":
     #example1()
     #example2()
     #example3()
     #example4()
-    example5()
+    #example5()
+    example6()

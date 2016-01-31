@@ -122,11 +122,59 @@ def example7():
     array = [hex(c) for c in message.encode("UTF-8")]
     print(array)
 
-    from bit_calculator import Calculator
+    from bit_byte_calculator import Calculator
     calc = Calculator()
     message_bytes = message.encode("UTF-8")
     print(list(calc.to_bits(c) for c in message_bytes))
 
+def example8():
+    from PIL import Image
+    from bit_byte_calculator import Calculator
+
+    ship = Image.open("IPhone_Internals.jpg")
+    calc = Calculator()
+
+    message = "message for encryption"
+    message_bytes= message.encode("UTF-8")
+    bits_list = list(calc.to_bits(c) for c in message_bytes )
+    len_h, len_l = divmod( len(message_bytes), 256 )
+    size_list = [calc.to_bits(len_h), calc.to_bits(len_l)]
+
+    # encode -> decode 
+    # 1. encode
+    w, h = ship.size
+    # bit_sequence(size_list+bits_sequence) means
+    # how to concatenate the two sequences
+    # to create a long sequence of individual bits 
+    # that we can embed into our image.
+    ship.show()
+    for p, m in enumerate(calc.bit_sequence(size_list+bits_list)):
+        y, x = divmod(p, w)
+        r, g, b = ship.getpixel((x, y))
+        # !important
+        r_new = (r & 0xfe) | m
+        print((r, g, b), m, (r_new, g, b))
+        ship.putpixel((x, y), (r_new, g, b))
+
+    ship.show()
+
+    # 2. decode
+    def get_bits(image, offset=0, size=16):
+        w, h = image.size
+        for p in range(offset, offset+size):
+            y, x = divmod(p, w)
+            r, g, b = image.getpixel((x, y))
+            yield r & 0x01
+
+    size_H, size_L = calc.byte_sequence(get_bits(ship, 0, 16))
+    print("size_H", size_H, "size_L", size_L)
+    size = size_H*256 + size_L
+    print("size", size)
+
+    message = calc.byte_sequence(get_bits(ship, 16, size*8))
+    print("message", message)
+    print("decoded message", bytes(message).decode("UTF-8"))
+    print("meage", list(message))
 
 if __name__ == "__main__":
     #example1()
@@ -135,4 +183,5 @@ if __name__ == "__main__":
     #example4()
     #example5()
     #example6()
-    example7()
+    #example7()
+    example8()

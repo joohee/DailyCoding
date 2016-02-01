@@ -176,6 +176,19 @@ def example8():
     print("decoded message", bytes(message).decode("UTF-8"))
     print("meage", list(message))
 
+def example9():
+    import hashlib
+    md5 = hashlib.new("md5")
+    with open("LHD_Number_1.jpg", "rb") as some_file:
+        md5.update(some_file.read())
+    print(md5.hexdigest())
+
+    import hmac
+    with open("LHD_Number_1.jpg", "rb") as some_file:
+        keyed = hmac.new(b"Agent Garbo", some_file.read())
+    print(keyed.hexdigest())
+
+
 if __name__ == "__main__":
     #example1()
     #example2()
@@ -184,4 +197,5 @@ if __name__ == "__main__":
     #example5()
     #example6()
     #example7()
-    example8()
+    #example8()
+    example9()

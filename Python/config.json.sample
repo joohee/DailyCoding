@@ -1,0 +1,8 @@
+{
+    "storage": {
+        "disk_name": Your Storage Name,
+        "usage_limit": Your Limit,
+        "instance_name": Your instance name,
+        "push_token_filename": Your token file name
+    }
+}

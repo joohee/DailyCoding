@@ -24,7 +24,7 @@ def example1():
 
 def example2():
     goog = data.DataReader('GOOG', data_source='google', start='3/14/2009', end='4/14/2014')
-    goog.tail()
+    print(goog.tail())
 
 if __name__ == "__main__":
     #example1()

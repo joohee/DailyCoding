@@ -8,14 +8,14 @@ import json
 def parse_config():
     config = ConfigParser()
     try:
-        file_path = os.path.join(os.path.dirname(__file__), 'config.ini_')
+        file_path = os.path.join(os.path.dirname(__file__), 'config.ini')
         with open(file_path, 'r') as config_file:
             config.read(file_path)
             return config
     except IOError as e:
         print("\tconfig.ini not found. try to find config.json...")
         try:
-            json_file_path = os.path.join(os.path.dirname(__file__), 'config.json_')
+            json_file_path = os.path.join(os.path.dirname(__file__), 'config.json')
             with open(json_file_path) as config_file:
                 config = json.loads(config_file.read())
                 return config

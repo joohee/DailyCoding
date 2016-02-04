@@ -69,8 +69,8 @@ class NumPyExample():
         # Mixing integer indexing with slices yields an array of lower rank,
         # while using only slices yields an array of the same rank as the
         # original array:
-        row_r1 = a[1, :]    # Rank 1 view of the second row of a  
-        row_r2 = a[1:2, :]  # Rank 2 view of the second row of a
+        row_r1 = a[1, :]    # Rank 1 view of the second row of a, 1차원 배열만 리턴. 
+        row_r2 = a[1:2, :]  # Rank 2 view of the second row of a, 1:2에서 2번째는 포함되지 않으므로 이중 배열로 리턴. 데이터는 위와 동일. 
         print("row_r1:", row_r1, "row_r1.shape:",  row_r1.shape)  # Prints "[5 6 7 8] (4,)"
         print ("row_r2:", row_r2, "row_r2.shape:", row_r2.shape)  # Prints "[[5 6 7 8]] (1, 4)"
 
@@ -82,7 +82,18 @@ class NumPyExample():
                                                                  #          [ 6]
                                                                  #          [10]] (3, 1)     "
 
+    def example5(self):
+        a = np.array([[1,2], [3,4], [5,6]])
+        # An example of integer array indexing.
+        # The returned array will have shape (3,) and 
+        print ("a[[0,1,2],[0,1,0]]):\n", a[[0,1,2], [0,1,0]])        # Prints "[1 4 5]". 2*3 배열의 [0,0], [1,1], [2,0] 값이므로 [1,4,5]가 된다. 
 
+        # When using integer array indexing, you can reuse the same
+        # element from the source array:
+        print("a[[0, 0], [1, 1]]:", a[[0, 0], [1, 1]])  # Prints "[2 2]"
+
+        # Equivalent to the previous integer array indexing example
+        print(np.array([a[0, 1], a[0, 1]]))  # Prints "[2 2]"
 
 if __name__ == "__main__":
     npe = NumPyExample()
@@ -94,6 +105,8 @@ if __name__ == "__main__":
     npe.example3()
     print("example4:")
     npe.example4()
+    print("example5:")
+    npe.example5()
 
 
 

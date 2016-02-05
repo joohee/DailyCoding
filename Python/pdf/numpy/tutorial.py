@@ -1,5 +1,3 @@
-# http://cs231n.github.io/python-numpy-tutorial/
-
 import numpy as np
 
 class NumPyExample():
@@ -95,18 +93,46 @@ class NumPyExample():
         # Equivalent to the previous integer array indexing example
         print(np.array([a[0, 1], a[0, 1]]))  # Prints "[2 2]"
 
+    def example6(self):
+        # create a new array from which we will select elements
+        a = np.array([[1,2,3],[4,5,6],[7,8,9],[10,11,12]])
+
+        print("a\n", a)          # prints "array([[ 1,  2,  3],
+                                 #                [ 4,  5,  6],
+                                 #                [ 7,  8,  9],
+                                 #                [10, 11, 12]])"
+
+        # create a array of indices
+        b = np.array([0,2,0,1])
+        
+        # select one element from each row of a using the indices in b
+        print("a[np.arange(4), b])\n", a[np.arange(4), b])      # prints "[ 1 6 7 11 ]
+
+        # mutate one element from each row of a using hte indices in b
+        a[np.arange(4), b] += 10
+
+        print("a\n", a)             # prints "array([[11,  2,  3],
+                                    #                [ 4,  5, 16],
+                                    #                [17,  8,  9],
+                                    #                [10, 21, 12]])
+        
+
+
+
 if __name__ == "__main__":
     npe = NumPyExample()
-    print("example1:")
+    print("\nexample1:")
     npe.example1()
-    print("example2:")
+    print("\nexample2:")
     npe.example2()
-    print("example3:")
+    print("\nexample3:")
     npe.example3()
-    print("example4:")
+    print("\nexample4:")
     npe.example4()
-    print("example5:")
+    print("\nexample5:")
     npe.example5()
+    print("\nexample6:")
+    npe.example6()
 
 
 

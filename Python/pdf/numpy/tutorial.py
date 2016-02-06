@@ -142,7 +142,8 @@ class NumPyExample():
         x = np.array([1,2], dtype=np.int32)
         print("x.dtype\n", x.dtype)
 
-    # Array math  
+    # Array math  * (multiply)는 각 요소의 곱의 합이 아니라 matrix 곱셈이다. 
+    # 곱의 합을 나타내고 싶으면 . (dot)을 이용해야 한다. 
     def example9(self):
         x = np.array([[1,2], [3,4]], dtype=np.float64)
         y = np.array([[5,6], [7,8]], dtype=np.float64)
@@ -159,6 +160,46 @@ class NumPyExample():
         print("x/y\n", x/y)
         print("np.divide(x,y)\n", np.divide(x,y))
 
+    # .(dot) function - You can get the product of multiply.
+    def example10(self):
+        x = np.array([[1,2],[3,4]])
+        y = np.array([[5,6],[7,8]])
+
+        v = np.array([9,10])
+        w = np.array([11,12])
+
+        # .(dot)을 이용하면 합을 얻을 수 있다. 
+        print("v.dot(w)\n", v.dot(w))
+        print("np.dot(v,w)\n", np.dot(v,w))
+
+        # matrix 끼리의 곱셈 연산 결과도 얻을수 있다. 
+        # 결과는 둘다 1 차 rank (차원?행렬) [ 29 67 ]이 된다. 
+        print("x.dot(v)\n", x.dot(v))
+        print("np.dot(x,v)\n", np.dot(x,v))
+
+        # 결과는 둘다 2 차 rank (차원?행렬)이 된다. 
+        #  [[19 22]
+        #   [ 43 50]]
+        print("x.dot(y)\n", x.dot(y))
+        print("np.dot(x,y)\n", np.dot(x,y))
+
+    # the useful functions of numpy - sum
+    def example11(self):
+        x = np.array([[1,2],[3,4]])
+        print("np.sum(x)\n", np.sum(x))         # compute sum of all elements
+        print("np.sum(x, axis=0)\n", np.sum(x, axis=0))         # compute sum of each column - [4 6]
+        print("np.sum(x, axis=1)\n", np.sum(x, axis=1))         # compute sum of each row - [3 7]
+
+    # You can transport a matrix using T
+    def example12(self):
+        x = np.array([[1,2],[3,4]])
+        print("x\n", x)
+        print("x.T\n", x.T)
+
+        # 하지만 1차원 배열에서 T는 변화가 없다. 
+        v = np.array([1,2,3])
+        print("v\n", v)
+        print("v.T\n", v.T)
 
 if __name__ == "__main__":
     npe = NumPyExample()
@@ -180,6 +221,12 @@ if __name__ == "__main__":
     npe.example8()
     print("\nexample9:")
     npe.example9()
+    print("\nexample10:")
+    npe.example10()
+    print("\nexample11:")
+    npe.example11()
+    print("\nexample12:")
+    npe.example12()
 
 
 

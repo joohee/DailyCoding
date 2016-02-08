@@ -34,7 +34,7 @@ doge:
   very: true
 
 youtube:
-  apikey: AIzaSyCwVXNr5FlEyG3uB-Ku98O2z3uILBelmKg
+  apikey: YOUR_API_KEY
 
 ---
 
@@ -43,7 +43,7 @@ spring:
 
   datasource:
     platform: mysql
-    url: jdbc:mysql://localhost:3306/vtf
+    url: jdbc:mysql://localhost:3306/prototype
     username: root
     password:
     driverClassName: com.mysql.jdbc.Driver
@@ -62,7 +62,7 @@ doge:
   wow: 4
 
 youtube:
-  apikey: AIzaSyCwVXNr5FlEyG3uB-Ku98O2z3uILBelmKg
+  apikey: YOUR_API_KEY
 
 ---
 
@@ -71,7 +71,7 @@ spring:
 
   datasource:
     platform: mysql
-    url: jdbc:mysql://localhost:3306/vtf
+    url: jdbc:mysql://localhost:3306/prototype
     username: root
     password:
     driverClassName: com.mysql.jdbc.Driver
@@ -87,4 +87,4 @@ application:
   message: Hello, ${spring.profiles.active}
 
 youtube:
-  apikey: AIzaSyCwVXNr5FlEyG3uB-Ku98O2z3uILBelmKg
+  apikey: YOUR_API_KEY

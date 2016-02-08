@@ -201,6 +201,72 @@ class NumPyExample():
         print("v\n", v)
         print("v.T\n", v.T)
 
+    # Broadcasting - 수학연산을 할 때 차원이 다른 행렬을 곱하고자 할 때 유용한 numpy의 메커니즘.  
+    def example13(self):
+        # x행렬과 v 행렬을 곱한 값을 y 행렬에 넣으려고 한다. 
+        x = np.array([[1,2,3],[4,5,6],[7,8,9],[10,11,12]])
+        v = np.array([1,0,1])
+        y = np.empty_like(x)
+
+        # 명시적인 loop 를 통해 v와 x의 row값을 더한다. 
+        for i in range(4):
+            y[i, :] = x[i, :] + v
+
+        # 결과는 아래와 같다. 
+        # [[2 2 4],
+        #  [5 5 7],
+        #  [8,8,10],
+        #  [11,11,13]]
+        print("y\n", y)
+
+    # example13()에서 x가 엄청 큰 배열일 경우 매우 느려질 수 있다.
+    # v를 명시적으로 더하는 것은 vv(v를 세로로 복사하여 쭉 늘인것) 과 같다. 
+    def example14(self):
+        x = np.array([[1,2,3],[4,5,6],[7,8,9],[10,11,12]])
+        v = np.array([1,0,1])
+        vv = np.tile(v, (4,1))          # 4개의 복사본이 copy된다. 
+        print("vv\n", vv)               # [[1,0,1],
+                                        #  [1,0,1],
+                                        #  [1,0,1],
+                                        #  [1,0,1]]
+
+        y = x + vv                      # 각각 더한다. 
+        print("y\n", y)                 # example13()의 결과와 동일하다. 
+
+    # numpy broadcasting 은 이렇게 명시적으로 복사할 필요 없이 계산할 수 있게 해주는 것이다. 
+    def example15(self):
+        x = np.array([[1,2,3],[4,5,6],[7,8,9],[10,11,12]])
+        v = np.array([1,0,1])
+        y = x + v                  # broadcasting 기능을 이용해서 각각의 row에 더해지게 된다. 
+        print("y\n", y)             # example13()의 결과와 동일하다. 
+
+    # Here are some applications of broadcasting.
+    def example16(self):
+        v = np.array([1,2,3])       # v has shafe (3,)
+        w = np.array([4,5])         # w has shafe (2,)
+        
+        # 곱셈을 하기 위해 v array를 모양을 변경한다. 
+        # 그렇게 하면 w는 곱셈을 할 수 있게 broadcast되고 (3,2) 배열이 결과물로 출력된다. 
+        print("np.reshape(v, (3,1)) * w\n", np.reshape(v, (3,1)) * w)
+
+        # x는 (2,3)이고 v는 (3,) 모양을 가진다. 
+        # x + v 연산을 할 경우 (2,3) 모양으로 확장된다. 
+        x = np.array([[1,2,3],[4,5,6]])
+        print("x+v\n", x+v)
+
+        # Vector 덧셈을 하는 두 가지 방법. 
+        # 1. x는 (2,3)이고 w는 (2,) 모양이다.
+        # x를 transport하면 (3,2)이고 + 연산을 하면 w는 transport가 되어 (3,2)의 모양을 가진다. (같은 거 세줄)
+        # 따라서 결과값은 (3,2)이고, 그 결과를 trasport하면 (2,3)이 된다. 
+        print("(x.T + w).T\n", (x.T + w).T)
+        
+        # 2. w를 (2,1) 모양으로 reshape한다. 그 후 + 연산으로 broadcasting 되도록 한다. 
+        print("x + np.reshape(w, (2,1))\n", x + np.reshape(w, (2,1)))
+
+        # Vector 상수 곱셈
+        # 상수 값은 배열 사이즈에 맞게 ((2,3)으로 broadcasting된다. 
+        print ("x * 2\n", x * 2)        
+
 if __name__ == "__main__":
     npe = NumPyExample()
     print("\nexample1:")
@@ -227,6 +293,14 @@ if __name__ == "__main__":
     npe.example11()
     print("\nexample12:")
     npe.example12()
+    print("\nexample13:")
+    npe.example13()
+    print("\nexample14:")
+    npe.example14()
+    print("\nexample15:")
+    npe.example15()
+    print("\nexample16:")
+    npe.example16()
 
 
 

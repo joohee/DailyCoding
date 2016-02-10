@@ -56,6 +56,42 @@ class ScipyTutorial():
         plt.legend(['Sine', 'Cosine'])
         plt.show()
 
+    def matplotlib_subplot(self):
+        x = np.arange(0, 3 * np.pi, 0.1)
+        y_sin = np.sin(x)
+        y_cos = np.cos(x)
+
+        # width 2, height 1인 subplot grid를 만들고, 첫 번째 subplot을 활성화 시킨다. 
+        plt.subplot(2, 1, 1)
+
+        # 첫 번쨰 subplot을 만든다. 
+        plt.plot(x, y_sin)
+        plt.title('Sine')
+
+        # 두 번째 subplot을 active상태로 만들고 두 번쨰 plot 을 만든다. 
+        plt.subplot(2, 1, 2)
+        plt.plot(x, y_cos)
+        plt.title('Cosine')
+
+        # show
+        plt.show()
+
+    def plot_imageshow(self):
+        img  = imread("assets/cat.jpg")
+        img_tinted = img * [1, 0.95, 0.9]
+
+        # 원본 이미지를 보여준다. 
+        plt.subplot(1, 2, 1)
+        plt.imshow(img)
+
+        # tint 된 이미지를 보여준다. 
+        plt.subplot(1, 2, 2)
+
+        # tint된 이미지를 보여주기 전에, uint8로 명시적으로 casting을 해 줘야 정상적으로 노출된다. 
+        plt.imshow(np.uint8(img_tinted))
+        plt.show()
+
+
 
 if __name__ == "__main__":
     tutorial = ScipyTutorial()
@@ -66,8 +102,14 @@ if __name__ == "__main__":
     #tutorial.distance()
     #print("plot the points\n")
     #tutorial.matplotlib_plotting();
-    print("plot the points with multiple lines.\n")
-    tutorial.matplotlib_plotting_multiple_lines()
+    #print("plot the points with multiple lines.\n")
+    #tutorial.matplotlib_plotting_multiple_lines()
+    #print("make subplot\n")
+    #tutorial.matplotlib_subplot()
+    print("plot_imageshow\n")
+    tutorial.plot_imageshow()
+
+
 
 
 

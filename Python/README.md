@@ -24,6 +24,22 @@ This directory is for pythong programming.
 │   │   ├── crawl_with_options.py : used python option parameters.
 │   │   ├── df.py : *nix command df parser. 
 │   │   └── word_count_in_file.py : word count of a specific file. 
+├── pdf
+│   ├── numpy
+│   │   ├── assets/
+│   │   ├── scipy_tutorial.py : scipy examples
+│   │   └── tutorial.py : numpy examples
+│   ├── python_for_finance (book)
+│   │   └── chapter1.py 
+│   └── python_for_secret_agents (book)
+│       ├── bit_byte_calculator.py
+│       ├── chapter2.py
+│       ├── chapter3.py
+│       ├── chapter4.py
+│       └── chapter5.py
+├── tips : python tips
+│   ├── decorator.py : decorator annotation examples.
+│   └── kind_of_methods.py : static method, class method example.
 ```
 
 - test : test files with unittest lib.
@@ -34,4 +50,8 @@ This directory is for pythong programming.
 ├── unittest_sample.py
 ├── unittest_skip.py
 └── unittest_subtest.py
+
 ```
+
+- environment : use anaconda
+   - http://conda.pydata.org/docs/using/envs.html

@@ -3,9 +3,9 @@
 **/*.ini
 **/*.p12
 **/__pycache__/*
-**/*.txt
 **/*.pyc
 **/*.file
 **/*.jpg
 **/*.json
 **/*.yml
+**/*.tmp

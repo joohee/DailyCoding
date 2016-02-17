@@ -117,10 +117,74 @@ class PfDA():
         ratings_std_by_title = ratings_std_by_title.ix[active_titles]
         print(ratings_std_by_title.sort_values(ascending=False)[:10])
 
+    def ex3(self):
+        names1880 = pd.read_csv('ch2_names/yob1880.txt', names=['name', 'sex', 'births'])
+        print(names1880[:10])
+
+        names1880.groupby('sex').births.sum()
+
+        # 모든 데이터를 DataFrame 하나로 취합 후 year 항목을 추가한다. 
+        years = range(1880, 2015)
+        pieces = []
+        columns = ['name', 'sex', 'births']
+        
+        for year in years:
+            path = 'ch2_names/yob%d.txt' % year
+            frame = pd.read_csv(path, names=columns)
+
+            frame['year'] = year
+            pieces.append(frame)
+
+        # 모두 하나의 DataFrame으로 취합한다. 
+        names = pd.concat(pieces, ignore_index=True)
+        print(names[:10])
+
+        total_births = names.pivot_table('births', index='year', columns='sex', aggfunc=sum)
+        print(total_births.tail())
+
+        # prop열을 추가해서 각 이름이 전체 출생수에서 차지하는 비율을 계산한다.
+        # prop값이 0.02라면 100명중 2명의 이름이 같다는 뜻이다. 
+        def add_prop(group):
+            # Integer division floors
+            births = group.births.astype(float)
+            group['prop'] = births / births.sum()
+            return group
+
+        names = names.groupby(['year', 'sex']).apply(add_prop)
+        print(names[:10])
+    
+        # 모든 그룹에서 prop열의 합이 1이 맞는지 확인하는 sanity check를 하는것이 좋다. 
+        result = np.allclose(names.groupby(['year', 'sex']).prop.sum(), 1)
+        print(result)
+
+        def get_top1000(group):
+            return group.sort_values(by='births', ascending=True)[:1000]
+
+        grouped = names.groupby(['year', 'sex'])
+        top1000 = grouped.apply(get_top1000)
+        top1000.index = np.arange(len(top1000))
+        print(top1000[:10])
+
+        # 이름 유형 분석 
+        boys = top1000[top1000.sex == 'M']
+        girls = top1000[top1000.sex == 'F']
+
+        # 연도별로 John이나 Mary라는 이름의 추이를 간단하게 그래프로 만들 수 있다. 
+        # 그 전에 데이터를 약간 변경하도록 한다. 
+        total_births = top1000.pivot_table('births', index='year', columns='name', aggfunc=sum)
+        print(total_births.info())
+        
+        # %matplotlib inline - ipython에서 그래프를 보여주기 위한 예약 함수. 
+        subset = total_births[['John', 'Harry', 'Mary', 'Marilyn']]
+        # .plot 함수는 그래프를 그려주지만 console에서는 안되는 듯 하다. 
+        subset.plot(subplots=True, figsize=(12,10), grid=False, title="Number of births per year")
+
+
 
 if __name__ == "__main__":
     pfda = PfDA()
-    pfda.ex1()
-    pfda.ex2()
+    #pfda.ex1()
+    #pfda.ex2()
+    pfda.ex3()
 
 

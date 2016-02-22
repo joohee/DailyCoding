@@ -14,6 +14,7 @@
 		266DD6511C76A20F0011DD2E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 266DD64F1C76A20F0011DD2E /* LaunchScreen.storyboard */; };
 		266DD65C1C76A20F0011DD2E /* XcodeTutorialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266DD65B1C76A20F0011DD2E /* XcodeTutorialTests.swift */; };
 		266DD6671C76A2100011DD2E /* XcodeTutorialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266DD6661C76A2100011DD2E /* XcodeTutorialUITests.swift */; };
+		266DD6751C7AF66B0011DD2E /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266DD6741C7AF66B0011DD2E /* RatingControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		266DD6621C76A20F0011DD2E /* XcodeTutorialUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XcodeTutorialUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		266DD6661C76A2100011DD2E /* XcodeTutorialUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeTutorialUITests.swift; sourceTree = "<group>"; };
 		266DD6681C76A2100011DD2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		266DD6741C7AF66B0011DD2E /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				266DD6461C76A20F0011DD2E /* AppDelegate.swift */,
 				266DD6481C76A20F0011DD2E /* ViewController.swift */,
+				266DD6741C7AF66B0011DD2E /* RatingControl.swift */,
 				266DD64A1C76A20F0011DD2E /* Main.storyboard */,
 				266DD64D1C76A20F0011DD2E /* Assets.xcassets */,
 				266DD64F1C76A20F0011DD2E /* LaunchScreen.storyboard */,
@@ -193,6 +196,7 @@
 				TargetAttributes = {
 					266DD6421C76A20F0011DD2E = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 43ZEKT2VFH;
 					};
 					266DD6561C76A20F0011DD2E = {
 						CreatedOnToolsVersion = 7.2;
@@ -257,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				266DD6491C76A20F0011DD2E /* ViewController.swift in Sources */,
+				266DD6751C7AF66B0011DD2E /* RatingControl.swift in Sources */,
 				266DD6471C76A20F0011DD2E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,10 +402,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = XcodeTutorial/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joey.tutorial.XcodeTutorial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -408,10 +416,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = XcodeTutorial/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joey.tutorial.XcodeTutorial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

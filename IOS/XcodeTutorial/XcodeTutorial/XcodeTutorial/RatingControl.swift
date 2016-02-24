@@ -3,7 +3,13 @@ import UIKit
 class RatingControl: UIView {
     
     // MARK: Properties
-    var rating = 0
+    // property observer 속성을 갖도록 한다.
+    var rating = 0 {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+    
     var ratingButtons = [UIButton]()
     
     // MARK: Initialization 
@@ -19,7 +25,7 @@ class RatingControl: UIView {
             button.setImage(emptyStarImage, forState: .Normal)
             button.setImage(filledStartImage, forState: .Selected)
             button.setImage(filledStartImage, forState: [.Highlighted, .Selected])
-            button.adjustsImageWhenDisabled = false     // 버튼 상태 변경시의 별도의 하이라이트 효과가 나타나는 것을 막아줌. 
+            button.adjustsImageWhenDisabled = false     // 버튼 상태 변경시의 별도의 하이라이트 효과가 나타나는 것을 막아줌.
             button.addTarget(self, action: "ratingButtonTapped:", forControlEvents: .TouchDown)
             ratingButtons += [button]
             addSubview(button)
@@ -37,6 +43,7 @@ class RatingControl: UIView {
             button.frame = buttonFrame
         }
         
+        updateButtonSelectionStates()
         
     }
 
@@ -46,8 +53,18 @@ class RatingControl: UIView {
     
     // MARK: Button Action
     func ratingButtonTapped(button: UIButton) {
-        print("Button pressed")
+        
+        // rating은 1~5의 값을 갖는다.
+        rating = ratingButtons.indexOf(button)! + 1
+        updateButtonSelectionStates()
+        
     }
     
+    func updateButtonSelectionStates() {
+        // rating 보다 작은 애들이 선택된 애들이다. 
+        for (index, button) in ratingButtons.enumerate() {
+            button.selected = index < rating
+        }
+    }
     
 }

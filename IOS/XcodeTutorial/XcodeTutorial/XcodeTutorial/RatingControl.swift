@@ -11,6 +11,8 @@ class RatingControl: UIView {
     }
     
     var ratingButtons = [UIButton]()
+    var spacing = 5
+    var stars = 5
     
     // MARK: Initialization 
     
@@ -20,7 +22,7 @@ class RatingControl: UIView {
         let filledStartImage = UIImage(named: "filledStar")
         let emptyStarImage = UIImage(named: "emptyStar")
         
-        for _ in 0..<5 {
+        for _ in 0..<stars {
             let button = UIButton()
             button.setImage(emptyStarImage, forState: .Normal)
             button.setImage(filledStartImage, forState: .Selected)
@@ -39,7 +41,7 @@ class RatingControl: UIView {
         var buttonFrame = CGRect(x: 0, y: 0, width: buttonSize, height: buttonSize)
         
         for (index, button) in ratingButtons.enumerate() {
-            buttonFrame.origin.x = CGFloat(index * (buttonSize + 5))
+            buttonFrame.origin.x = CGFloat(index * (buttonSize + spacing))
             button.frame = buttonFrame
         }
         
@@ -61,7 +63,7 @@ class RatingControl: UIView {
     }
     
     func updateButtonSelectionStates() {
-        // rating 보다 작은 애들이 선택된 애들이다. 
+        // rating 보다 작은 애들이 선택된 애들이다.
         for (index, button) in ratingButtons.enumerate() {
             button.selected = index < rating
         }

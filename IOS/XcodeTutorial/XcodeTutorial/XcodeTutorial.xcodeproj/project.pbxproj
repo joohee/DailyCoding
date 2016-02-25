@@ -16,6 +16,8 @@
 		266DD6671C76A2100011DD2E /* XcodeTutorialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266DD6661C76A2100011DD2E /* XcodeTutorialUITests.swift */; };
 		266DD6751C7AF66B0011DD2E /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266DD6741C7AF66B0011DD2E /* RatingControl.swift */; };
 		266DD6771C7D83010011DD2E /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266DD6761C7D83010011DD2E /* Meal.swift */; };
+		266DD6791C7E951D0011DD2E /* MealTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266DD6781C7E951D0011DD2E /* MealTableViewCell.swift */; };
+		266DD67B1C7EBE9B0011DD2E /* MealTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266DD67A1C7EBE9B0011DD2E /* MealTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		266DD6681C76A2100011DD2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		266DD6741C7AF66B0011DD2E /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		266DD6761C7D83010011DD2E /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		266DD6781C7E951D0011DD2E /* MealTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealTableViewCell.swift; sourceTree = "<group>"; };
+		266DD67A1C7EBE9B0011DD2E /* MealTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 				266DD6461C76A20F0011DD2E /* AppDelegate.swift */,
 				266DD6481C76A20F0011DD2E /* ViewController.swift */,
 				266DD6741C7AF66B0011DD2E /* RatingControl.swift */,
+				266DD67A1C7EBE9B0011DD2E /* MealTableViewController.swift */,
+				266DD6781C7E951D0011DD2E /* MealTableViewCell.swift */,
 				266DD6761C7D83010011DD2E /* Meal.swift */,
 				266DD64A1C76A20F0011DD2E /* Main.storyboard */,
 				266DD64D1C76A20F0011DD2E /* Assets.xcassets */,
@@ -267,6 +273,8 @@
 				266DD6491C76A20F0011DD2E /* ViewController.swift in Sources */,
 				266DD6751C7AF66B0011DD2E /* RatingControl.swift in Sources */,
 				266DD6471C76A20F0011DD2E /* AppDelegate.swift in Sources */,
+				266DD67B1C7EBE9B0011DD2E /* MealTableViewController.swift in Sources */,
+				266DD6791C7E951D0011DD2E /* MealTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

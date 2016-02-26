@@ -10,6 +10,9 @@
 **/*.yml
 **/*.tmp
 
+**/*.idea/
+**/out/
+
 ### for swift
 
 # Xcode

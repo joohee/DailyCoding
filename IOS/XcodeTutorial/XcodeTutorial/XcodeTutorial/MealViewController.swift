@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MealViewController.swift
 //  XcodeTutorial
 //
 //  Created by Joohee Kang on 2016. 2. 19..
@@ -8,20 +8,21 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // MARK: Properties
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var mealNameLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var ratingControl: RatingControl!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    var meal = Meal?()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         nameTextField.delegate = self
-        
-        
+        checkValidMealName()
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,6 +31,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     // MARK: UITextFieldDelegate
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        saveButton.enabled = false
+        return true
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         // hide the keyboard
         textField.resignFirstResponder()
@@ -37,7 +43,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        mealNameLabel.text = textField.text
+        checkValidMealName()
+        navigationItem.title = textField.text
+    }
+    
+    func checkValidMealName() {
+        let text = nameTextField.text ?? ""
+        saveButton.enabled = !text.isEmpty
     }
     
     // MARK: UIImagePickerControllerDelegate
@@ -56,6 +68,22 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         // dismiss the picker
         dismissViewControllerAnimated(true, completion: nil)
         
+    }
+    
+    // MARK: Navigations
+    
+    @IBAction func cancel(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if saveButton === sender {
+            let name = nameTextField.text ?? ""
+            let photo = photoImageView.image
+            let rating = ratingControl.rating
+            
+            meal = Meal(name: name, photo: photo, rating: rating)
+        }
     }
     
     // MARK: Actions
@@ -78,5 +106,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         
     }
 
+    
 }
 

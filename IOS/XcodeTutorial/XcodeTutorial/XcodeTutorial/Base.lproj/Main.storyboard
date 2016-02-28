@@ -123,6 +123,7 @@
                                     <outlet property="nameLabel" destination="zj6-Vh-u1H" id="WzA-Xz-d8x"/>
                                     <outlet property="photoImageView" destination="KYx-u2-CgA" id="AkY-un-Xfl"/>
                                     <outlet property="ratingControl" destination="Olq-e1-Woz" id="mQh-4T-Ssr"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="ZoP-3U-xhq"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -161,33 +162,6 @@
             </objects>
             <point key="canvasLocation" x="2512" y="304"/>
         </scene>
-        <!--Table View Controller-->
-        <scene sceneID="1gj-66-OrN">
-            <objects>
-                <tableViewController id="iza-Ms-4Ak" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="0dp-i2-0Co">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="hLT-Zt-v1m">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hLT-Zt-v1m" id="hMi-Tg-Yl3">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="iza-Ms-4Ak" id="fng-QQ-BrW"/>
-                            <outlet property="delegate" destination="iza-Ms-4Ak" id="50h-Xc-Lkj"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EJ8-yy-Yue" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="nex-Wi-pPE">
             <objects>
@@ -222,10 +196,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bkm-bZ-bfe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1055" y="318"/>
+            <point key="canvasLocation" x="1143" y="722"/>
         </scene>
     </scenes>
     <resources>
         <image name="DefaultPhoto" width="540" height="540"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="ZoP-3U-xhq"/>
+    </inferredMetricsTieBreakers>
 </document>

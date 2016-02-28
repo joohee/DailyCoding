@@ -79,7 +79,13 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     // MARK: Navigations
     
     @IBAction func cancel(sender: UIBarButtonItem) {
-        dismissViewControllerAnimated(true, completion: nil)
+        // true면 + 버튼을 통해 들어온거고, false 면 tableCell을 클릭해서 들어왔다는 의미.
+        let isPresentingInAddingMealMode = presentingViewController is UINavigationController
+        if isPresentingInAddingMealMode {
+            dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            navigationController!.popToRootViewControllerAnimated(true)
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

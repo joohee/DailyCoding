@@ -201,17 +201,18 @@ class SNSObject:
 if __name__ == "__main__":
     sns = SNSObject()
     client = boto3.client('sns')
+    section = input("please insert sectdion name: ")
     selected = input("please insert your choice: (1 - GCM, 2 - APNS) ")
     pushToken = input('please insert your pushToken: ')
     message = input('please insert message. if you don\'t insert it, you\'ll get the default message: ')
 
     if selected == '2':
         if len(message) > 0:
-            sns.push_apns('section', client, pushToken, message)
+            sns.push_apns(section, client, pushToken, message)
         else:
-            sns.push_apns('section', client, pushToken)
+            sns.push_apns(section, client, pushToken)
     else:
         if len(message) > 0:
-            sns.push_gcm('section', client, pushToken, message)
+            sns.push_gcm(section, client, pushToken, message)
         else:
-            sns.push_gcm('section', client, pushToken)
+            sns.push_gcm(section, client, pushToken)

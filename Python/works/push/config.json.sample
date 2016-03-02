@@ -1,0 +1,8 @@
+{
+    "section1": {
+        "push_token_filename": "push_filename1"
+    },
+    "section2": {
+        "push_token_filename": "push_filename2"
+    }
+}

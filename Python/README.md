@@ -40,6 +40,16 @@ This directory is for pythong programming.
 ├── tips : python tips
 │   ├── decorator.py : decorator annotation examples.
 │   └── kind_of_methods.py : static method, class method example.
+└── works : used to workplace.
+    └── push
+        ├── config.json.sample : push config file.
+        ├── push_filename.sample : push token file.
+        ├── section_push.py : sample file to push notification using send_push.py.
+        ├── send_push.py : send push function.
+        ├── sns.py : AWS SNS function.
+        └── sns_config.ini : sns.py config file.
+
+
 ```
 
 - test : test files with unittest lib.

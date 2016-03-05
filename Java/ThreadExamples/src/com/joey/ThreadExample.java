@@ -14,10 +14,7 @@ public class ThreadExample {
             Thread t = new Thread(r, "thread-" + num.getAndIncrement());
             t.setDaemon(false);
             t.setPriority(Thread.NORM_PRIORITY);
-            t.setUncaughtExceptionHandler((t1, e) -> {
-                System.out.println("error occured..." +  t1.getName() + ", " + e.getClass().getSimpleName());
-                e.printStackTrace();
-            });
+            t.setUncaughtExceptionHandler(new ThreadUncaughtExceptionHandler());
             return t;
         }
     });

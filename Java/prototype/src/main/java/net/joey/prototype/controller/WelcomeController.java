@@ -1,12 +1,9 @@
 package net.joey.prototype.controller;
 
-import net.joey.prototype.domain.Account;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
-import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
+import net.joey.prototype.domain.Account;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @Api(value = "welcome", description = "test APIs")
+@Slf4j
 public class WelcomeController {
-
-    private Logger logger = LoggerFactory.getLogger(WelcomeController.class);
-
-    @Autowired
-    private ModelMapper modelMapper;
 
     @Value("${application.message}")
     private String appMessage;

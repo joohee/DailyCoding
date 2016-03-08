@@ -12,8 +12,7 @@ import com.google.api.services.youtube.model.ResourceId;
 import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
 import com.google.api.services.youtube.model.Thumbnail;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -26,8 +25,8 @@ import java.util.List;
  * Created by skplanet on 14. 12. 31..
  */
 @Service
+@Slf4j
 public class YoutubeCrawler {
-    private static Logger logger = LoggerFactory.getLogger(YoutubeCrawler.class);
 
     @Value("${youtube.apikey}")
     private String youtubeApiKey;
@@ -69,14 +68,14 @@ public class YoutubeCrawler {
            List<SearchResult> searchResultList = searchResponse.getItems();
             if (searchResultList != null) {
                 //prettyPrint(searchResultList.iterator(), queryTerm);
-                logger.info("found size: {}", searchResultList.size());
-                logger.info("execute complete...");
+                log.info("found size: {}", searchResultList.size());
+                log.info("execute complete...");
             }
         } catch (GoogleJsonResponseException e) {
-            logger.error("There was a service error: " + e.getDetails().getCode() + " : "
+            log.error("There was a service error: " + e.getDetails().getCode() + " : "
                     + e.getDetails().getMessage());
         } catch (IOException e) {
-            logger.error("There was an IO error: " + e.getCause() + " : " + e.getMessage());
+            log.error("There was an IO error: " + e.getCause() + " : " + e.getMessage());
         } catch (Throwable t) {
             t.printStackTrace();
         }
@@ -85,13 +84,13 @@ public class YoutubeCrawler {
 
     private static void prettyPrint(Iterator<SearchResult> iteratorSearchResults, String query) {
 
-        logger.info("\n=============================================================");
-        logger.info(
+        log.info("\n=============================================================");
+        log.info(
                 "   First " + NUMBER_OF_VIDEOS_RETURNED + " videos for search on \"" + query + "\".");
-        logger.info("=============================================================\n");
+        log.info("=============================================================\n");
 
         if (!iteratorSearchResults.hasNext()) {
-            logger.info(" There aren't any results for your query.");
+            log.info(" There aren't any results for your query.");
         }
 
         while (iteratorSearchResults.hasNext()) {
@@ -103,11 +102,11 @@ public class YoutubeCrawler {
             if (rId.getKind().equals("youtube#video")) {
                 Thumbnail thumbnail = (Thumbnail) singleVideo.getSnippet().getThumbnails().get("default");
 
-                logger.info(" Video Id" + rId.getVideoId());
-                logger.info(" Title: " + singleVideo.getSnippet().getTitle());
-                logger.info(" Thumbnail: " + thumbnail.getUrl());
-                logger.info(" Published: " + singleVideo.getSnippet().getPublishedAt());
-                logger.info("\n-------------------------------------------------------------\n");
+                log.info(" Video Id" + rId.getVideoId());
+                log.info(" Title: " + singleVideo.getSnippet().getTitle());
+                log.info(" Thumbnail: " + thumbnail.getUrl());
+                log.info(" Published: " + singleVideo.getSnippet().getPublishedAt());
+                log.info("\n-------------------------------------------------------------\n");
             }
         }
     }

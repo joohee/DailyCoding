@@ -1,11 +1,10 @@
 package net.joey.prototype.service;
 
+import lombok.extern.slf4j.Slf4j;
 import net.joey.prototype.domain.Account;
 import net.joey.prototype.domain.support.AccountDTO;
 import net.joey.prototype.repository.AccountRepository;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -15,8 +14,8 @@ import java.util.Date;
  * Created by skplanet on 14. 12. 19..
  */
 @Service
+@Slf4j
 public class AccountService {
-     private Logger logger = LoggerFactory.getLogger(AccountService.class);
 
     @Inject
     private ModelMapper modelMapper;

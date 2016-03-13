@@ -1,15 +1,34 @@
 import win32com.client
+import os
+import datetime
 
-def get_stock_code():
-    instCpStockCode = win32com.client.Dispatch("CpUtil.CpStockCode")
+def get_code_name(instCpStockCode, today, filename, index_no=2):
     print(instCpStockCode.GetCount())
     instCpStockCount = instCpStockCode.GetCount()
 
-    for i in range(0, instCpStockCount):
-        print("%d\t%s\t%s" % (i, instCpStockCode.GetData(0,i), instCpStockCode.GetData(1,i)))
-        #print("code: ", instCpStockCode.GetData(0,i))
-        #print("name: ", instCpStockCode.GetData(1,i))
+    dirname = os.path.dirname(__file__)
+    fullpath = os.path.join(dirname, today+'_'+filename)
+    with open(fullpath, "w") as f:
+        for i in range(0, instCpStockCount):
+            line = str(i)
+            for idx in range(0, index_no):
+                line += "\t{0}".format(instCpStockCode.GetData(idx, i))
+            #f.write("%d\t%s\t%s\n" % (i, instCpStockCode.GetData(0,i), instCpStockCode.GetData(1,i)))
+            f.write(line+"\n")
+
+    print("saved...")
 
 if __name__ == '__main__':
-    get_stock_code()
+    today = datetime.datetime.now().strftime('%y%m%d')
+    instCpStockCode = win32com.client.Dispatch("CpUtil.CpStockCode")
+    instCpFutureCode = win32com.client.Dispatch("CpUtil.CpFutureCode")
+    instCpOptionCode = win32com.client.Dispatch("CpUtil.CpOptionCode")
+    instCpKFutureCode = win32com.client.Dispatch("CpUtil.CpKFutureCode")
+    instCpElwCode = win32com.client.Dispatch("CpUtil.CpElwCode")
+
+    get_code_name(instCpStockCode, today, 'stock_code_name.csv')
+    get_code_name(instCpFutureCode, today, 'future_code_name.csv')
+    get_code_name(instCpOptionCode, today, 'option_code_name.csv', 5)
+    get_code_name(instCpKFutureCode, today, 'kfuture_code_name.csv')
+    get_code_name(instCpElwCode, today, 'elw_code_name.csv', 7)
 

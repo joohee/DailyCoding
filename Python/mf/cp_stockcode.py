@@ -8,7 +8,7 @@ def get_code_name(instCpStockCode, today, filename, index_no=2):
 
     dirname = os.path.dirname(__file__)
     fullpath = os.path.join(dirname, today+'_'+filename)
-    with open(fullpath, "w") as f:
+    with open(fullpath, "w", encoding='utf-8') as f:
         for i in range(0, instCpStockCount):
             line = str(i)
             for idx in range(0, index_no):

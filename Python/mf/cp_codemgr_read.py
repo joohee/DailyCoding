@@ -1,5 +1,5 @@
-import win32com.client
-import datetime 
+mport win32com.client
+Import datetime 
 
 def get_or_none(code, value):
     if value is None:
@@ -70,16 +70,6 @@ def get_stock_control_kind(code):
     value = code_dic.get(code)
     return get_or_none(code, value)
 
-def get_stock_status_kind(code):
-    code_dic = {
-        "0": "정상",
-        "1": "거래정지",
-        "2": "거래중단"
-    }
-        
-    value = code_dic.get(code)
-    return get_or_none(code, value)
-
 def get_header(idx):
     header_dic = {
         "0": "idx",
@@ -88,10 +78,9 @@ def get_header(idx):
         "3": "부 구분코드",
         "4": "소속부",
         "5": "KOSPI200 종목여부",
-        "6": "증권전산업종코드",
-        "7": "감리구분",
-        "8": "상장일",
-        "9": "주식상태"
+        "6": "감리구분",
+        "7": "상장일",
+        "8": "증권전산업종코드"
     }
     return header_dic.get(idx)
 
@@ -100,41 +89,23 @@ def cp_code_mgr():
     codeList = instCpCodeMgr.GetStockListByMarket(1)
     today = datetime.datetime.now()
 
-    print("=========================\n")
-    with open(today.strftime('%Y%m%d')+'_cpCodeMgr_detail.csv', 'w', encoding='utf-8') as f:
-        header_list = []
-        for i in range(0, 8):
-            header_list.append(get_header(str(i)))
-
-        f.write('\t'.join(header_list))
-        f.write('\n')
-
-        str_list = []
-        for i, code in enumerate(codeList):
-            secondCode = instCpCodeMgr.GetStockSectionKind(code)
-            marketKindCode = instCpCodeMgr.GetStockMarketKind(code)
-            kospi200Code = instCpCodeMgr.GetStockKospi200Kind(code)
-            controlCode = instCpCodeMgr.GetStockControlKind(code)
-            listedDate = instCpCodeMgr.GetStockListedDate(code)
-            industryCode = instCpCodeMgr.GetStockIndustryCode(code)
-            industryName = instCpCodeMgr.GetIndustryName(industryCode)
-            statusKind = instCpCodeMgr.GetStockStatusKind(code)
-            name = instCpCodeMgr.CodeToName(code)
-            
-            #print(i, code, secondCode, name)
-            str_list.append(str(i))
-            str_list.append(code)
-            str_list.append(name)
-            str_list.append(get_code_dic(str(secondCode)))
-            str_list.append(get_stock_market_kind(str(marketKindCode)))
-            str_list.append(get_stock_kospi_200_kind(str(kospi200Code)))
-            str_list.append(industryName+"("+str(industryCode)+")")
-            str_list.append(str(listedDate))
-            str_list.append(get_stock_control_kind(str(controlCode)))
-            str_list.append(get_stock_status_kind(str(statusKind)))
-            f.write('\t'.join(str_list))
-            f.write('\n')
-            del str_list[:]
+    codes = instCpCodeMgr.GetIndustryList()
+    for i in range(len(codes)):
+        groupCodeList = instCpCodeMgr.GetGroupCodeList(codes[i])
+        industryName = instCpCodeMgr.GetIndustryName(codes[i])
+        for j in range(len(groupCodeList)):
+            groupCode = groupCodeList[j]
+            groupName = instCpCodeMgr.CodeToName(groupCode)
+            print("code: {}({}), groupCode: {}({})".format(industryName, codes[i], groupName, groupCodeList[j]))
+        
+    codes1 = instCpCodeMgr.GetKosdaqIndustry1List()
+    for i in range(len(codes1)):
+        print("index: {}, code: {}".format(i, codes1[i]))
+    print("============")
+    codes2 = instCpCodeMgr.GetKosdaqIndustry2List()
+    for i in range(len(codes2)):
+        print("index: {}, code: {}".format(i, codes2[i]))
+    print("============")
 
 if __name__ == '__main__':
     print("====== CpCodeMgr =======")

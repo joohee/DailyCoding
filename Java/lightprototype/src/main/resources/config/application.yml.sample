@@ -1,0 +1,90 @@
+spring:
+  profiles: localhost
+
+  http:
+    encoding:
+      charset: UTF-8 # the encoding of HTTP requests/responses
+      enabled: true # enable http encoding support
+      force: true # force the configured encoding
+
+  thymeleaf:
+    cache: false
+
+# db
+  datasource:
+    platform: mysql
+    url: jdbc:mysql://localhost:3306/prototype
+    username: root
+    password:
+    driverClassName: com.mysql.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+
+application:
+  message: Hello, ${spring.profiles.active}
+
+doge:
+  wow: 10
+  such: so
+  very: true
+
+youtube:
+  apikey: YOUR_API_KEY
+
+---
+
+spring:
+  profiles: dev
+
+  datasource:
+    platform: mysql
+    url: jdbc:mysql://localhost:3306/prototype
+    username: root
+    password:
+    driverClassName: com.mysql.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+
+application:
+  message: Hello, ${spring.profiles.active}
+
+doge:
+  wow: 4
+
+youtube:
+  apikey: YOUR_API_KEY
+
+---
+
+spring:
+  profiles: prod
+
+  datasource:
+    platform: mysql
+    url: jdbc:mysql://localhost:3306/prototype
+    username: root
+    password:
+    driverClassName: com.mysql.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+
+application:
+  message: Hello, ${spring.profiles.active}
+
+youtube:
+  apikey: YOUR_API_KEY

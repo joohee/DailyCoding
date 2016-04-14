@@ -10,9 +10,9 @@ class S3Object:
             print(bucket.name)
         pass
 
-    def upload(self, bucket_name, filename):
+    def upload(self, bucket_name, filename, ACL='public-read'):
         data = open(filename, 'rb')
-        self.s3.Bucket(bucket_name).put_object(Key=filename, Body=data)
+        self.s3.Bucket(bucket_name).put_object(Key=filename, Body=data, ACL=ACL)
 
     def list(self, bucket_name, dirname):
         fileobjs = []

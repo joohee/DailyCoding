@@ -38,7 +38,7 @@ public class GoogleAuthKeyServiceTest {
         String host = "test.domain.com";
         AuthResponse res = googleAuthKeyService.createKey(username, host);
 
-        log.info("encodedKey: {}, url: {}", res.getEncodedKey(), res.getUrl());
+        log.info("encodedKey: {}, url: {}", res.getEncodedKey(), res.getUrlForQR());
     }
 
     @Test

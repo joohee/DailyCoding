@@ -19,7 +19,7 @@ import java.util.Random;
 @Slf4j
 public class GoogleAuthKeyService {
 
-    private final static int SECRET_SIZE = 5;
+    private final static int SECRET_SIZE = 10;
     private final static int NUM_OF_SCRATCH_CODES = 5;
     private final static int SCRATCH_CODE_SIZE = 5;
 

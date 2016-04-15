@@ -29,5 +29,14 @@ class S3Object:
         obj.Acl().put(ACL='public-read')
         print("{} set be public...".format(obj.key))
 
+    def get_url(self, bucket_name, key, expiration=3600000, http_method=None):
+        params = {}
+        params['Bucket'] = bucket_name
+        params['Key'] = key
+        url = self.client.generate_presigned_url('get_object', Params=params, ExpiresIn=expiration, HttpMethod=http_method)
+
+        print (url)
+        return url
+
 if __name__ == '__main__':
     print("use S3Object class")

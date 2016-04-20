@@ -26,12 +26,14 @@ class SQSObject:
         print("Success to send a message...")
         print(response)
 
-    def get_message(self, queue_name, max_number_of_messages=1):
+    def get_message(self, queue_name, max_number_of_messages=1, delete_before_return=True):
         queue = self.get_queue(queue_name)
-        for message in queue.receive_messages(MaxNumberOfMessages=max_number_of_messages):
-            print("message: {}".format(message))
-            print("body: {}".format(message.body))
-            message.delete()
+        messages = queue.receive_messages(MaxNumberOfMessages=max_number_of_messages)
+        for message in messages: 
+            if delete_before_return == True:
+                message.delete()
+                print("message deleted...{}".format(message.body))
+        return messages
 
 
 if __name__ == '__main__':
@@ -41,4 +43,9 @@ if __name__ == '__main__':
     message['date'] = datetime.datetime.now().strftime('%Y%m%d-%H%M%s')
 
     sqs.send_message('test-for-joey', json.dumps(message))
-    sqs.get_message('test-for-joey')
+    messages = sqs.get_message('test-for-joey', 10,  True)
+
+    print("count: {}".format(str(len(messages))))
+    for message in messages: 
+        print("message: {}".format(message))
+        print("body: {}".format(message.body))

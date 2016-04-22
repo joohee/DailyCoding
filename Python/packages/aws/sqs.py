@@ -3,6 +3,25 @@ import json
 import datetime
 
 class SQSObject:
+    ''' boto3 을 통해 SQS를 이용한 기능이 포함된 Class입니다. 
+
+        Init: 
+            profile_name이 필요합니다. 일반적으로 ~/.aws/credentials에 추가하여 사용합니다.
+            region까지 지정하고 싶을 경우에 ~/.aws/config 에 기록하고, credentials 에 기록한 profile을 사용합니다.
+
+        Methods:
+            - get_queue(queue_name)
+            : Queue를 반환합니다. 없으면 SystemExit Error를 발생시킵니다.
+            - send_message(queue_name, message_body) 
+            : 특정 Queue에 메세지를 전송합니다.
+            - get_message(queue_name, max_number_of_message, delete_before_return)
+            : 특정 Queue에서 지정한 크기만큼 메세지를 가져옵니다. 갯수는 1-10개까지 요청할 수 있으며    
+            실제 가져오는 메세지는 요청 숫자보다 적을 수 있습니다.
+            Queue로부터 가져올 때 메세지를 삭제할 것인지 옵션으로 처리할 수 있습니다. // TODO  기능확인 필요.
+
+            http://boto3.readthedocs.org/en/latest/reference/services/sqs.html#SQS.Client.delete_message
+
+    '''
     
     def __init__(self, profile_name):
         self.session = boto3.Session(profile_name=profile_name)

@@ -19,6 +19,7 @@ class S3Object:
 
     def __init__(self, profile_name):
         self.session = boto3.Session(profile_name=profile_name)
+        self.client = self.session.client('s3')
         self.s3 = self.session.resource('s3')
         for bucket in self.s3.buckets.all():
             print(bucket.name)

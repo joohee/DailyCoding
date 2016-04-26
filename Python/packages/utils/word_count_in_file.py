@@ -1,6 +1,19 @@
 import time
 from collections import Counter
 
+''' count(inputfile, outputfile) 에서
+    inputfile은 line 단위로 문장이 기록되어 있으며, 
+    collections.Counter 클래스를 이용하여 
+    각각의 발생 빈도수를 기록합니다. 
+
+    Returns:
+        count() 메소드 호출할 때 기록한 outputfile 이름에 
+        결과값을 line 단위로 기록합니다. 
+
+    Exception:
+        FileNotFound - inputfile을 찾을 수 없을 때 발생합니다. 
+
+'''
 def count(inputfile, outputfile):
     cnt = Counter()
 

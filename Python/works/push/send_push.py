@@ -4,6 +4,12 @@ import json
 import os, sys
 
 def parse_config():
+    ''' config.json을 읽어들입니다. 
+        파일명은 고정입니다. 
+
+        Exception: 
+            IOError - 파일이 없을 경우 발생합니다. 
+    '''
     try:
         json_file_path = os.path.join(os.path.dirname(__file__), 'config.json')
         with open(json_file_path) as config_file:
@@ -14,6 +20,17 @@ def parse_config():
         return None
 
 def push(section, message):
+    ''' section에 해당하는 파일명을 읽고, message를 전송합니다. 
+        packages.aws.sns의 SNSObject를 이용하여 전송합니다. 
+
+        Args: 
+            section - config.json 에 기록된 filename
+            message - 발송할 메세지. json 형식. 
+
+        Exception: 
+            config.json이 없을 경우 발생합니다.  
+
+    '''
     config = parse_config()
     if config != None:
         push_token_file = config[section]['push_token_filename']

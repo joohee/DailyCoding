@@ -73,6 +73,10 @@ def find(url):
             print("check your config file...")
 
 def save(number, start, end):
+    '''입력받은 start num ~ end num까지의 회차에 대해 파일로 저장합니다.
+
+        baseUrl은 ConfigParser를 통해 config.ini 파일에서 읽어옵니다. 
+    '''
    baseurl = starturl = get_from_config('baseurl')
    print (baseurl)
    for no in range(start, end):

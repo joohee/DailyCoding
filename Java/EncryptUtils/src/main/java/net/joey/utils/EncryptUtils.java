@@ -24,7 +24,7 @@ public class EncryptUtils {
         encryptor.setStringOutputType("base64");
     }
 
-    public static String hash256(String rawData) throws NoSuchAlgorithmException {
+    public String hash256(String rawData) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(rawData.getBytes());
         return String.valueOf(Hex.encodeHex(md.digest()));

@@ -8,7 +8,8 @@ public class Main {
 
     private static Logger logger = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) throws NoSuchAlgorithmException {
-        String result = EncryptUtils.hash256("abcdef");
+        EncryptUtils encryptUtils = new EncryptUtils();
+        String result = encryptUtils.hash256("abcdef");
         logger.info("The Result: {}", result);
     }
 }

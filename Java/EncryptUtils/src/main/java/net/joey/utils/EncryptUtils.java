@@ -9,6 +9,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
+ * - hash256(String)
+ *  SHA-256 암호화 알고리즘을 이용하여 리턴한다
+ * - encrypt(String)
+ *  내부 encryptor (PBEWithMD5AndDES 알고리즘 사용 및 base64 인코딩 을 이용하여 암호화한다
+ * - decrypt(String)
+ *  encrypt(String) 메소드를 이용한 결과값을 복호화한다. 이메일로 전송된 안전한 링크로부터 데이터를 추출하는 데 사용한다.
  * Created by joey on 2015. 3. 26..
  */
 public class EncryptUtils {

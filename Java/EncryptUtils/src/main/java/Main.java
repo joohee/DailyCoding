@@ -4,6 +4,9 @@ import org.slf4j.LoggerFactory;
 
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * EncryptUtils을 이용하여 String을 SHA-256 암호화 한 후 출력한다.
+ */
 public class Main {
 
     private static Logger logger = LoggerFactory.getLogger(Main.class);

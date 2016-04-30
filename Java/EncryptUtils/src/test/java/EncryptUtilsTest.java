@@ -4,9 +4,9 @@ import org.junit.Test;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 /**
- * Created by a1100007 on 2016. 4. 28..
+ * Created by joey on 2016. 4. 28..
  */
-public class EncryptionUtilsTest {
+public class EncryptUtilsTest {
     EncryptUtils encryptUtils = new EncryptUtils();
 
     private String rawData = "neigie@gmail.com";

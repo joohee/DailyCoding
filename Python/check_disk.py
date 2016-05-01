@@ -5,6 +5,20 @@ import os, sys
 from configparser import ConfigParser
 import json
 
+'''config.json(config.ini) 설정을 읽어서 특정 storage의 용량을 체크,
+    기준값 이상인 경우 push_token_filename을 읽어 push 를 전송한다. 
+
+cat config.json.sample
+{
+    "storage": {
+        "disk_name": Your Storage Name,
+        "usage_limit": Your Limit,
+        "instance_name": Your instance name,
+        "push_token_filename": Your token file name
+    }
+}
+
+'''
 def parse_config():
     config = ConfigParser()
     try:

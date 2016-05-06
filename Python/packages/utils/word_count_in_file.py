@@ -1,7 +1,16 @@
 import time
 from collections import Counter
 
-''' count(inputfile, outputfile) 에서
+""" input file 에 있는 파일의 단어 출현 빈도수를 기록합니다. 
+
+    도움말을 보려면 아래와 같이 입력하세요. 
+        pydoc word_count_in_file
+    HTML 파일로 생성하려면 아래와 같이 입력하세요. 
+        pydoc -w word_count_in_file
+
+"""
+def count(inputfile, outputfile):
+    """ count(inputfile, outputfile) 에서
     inputfile은 line 단위로 문장이 기록되어 있으며, 
     collections.Counter 클래스를 이용하여 
     각각의 발생 빈도수를 기록합니다. 
@@ -13,8 +22,7 @@ from collections import Counter
     Exception:
         FileNotFound - inputfile을 찾을 수 없을 때 발생합니다. 
 
-'''
-def count(inputfile, outputfile):
+    """
     cnt = Counter()
 
     print("start..")

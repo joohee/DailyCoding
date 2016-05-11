@@ -17,7 +17,7 @@ public class SampleRedisStore {
 
 	private static final long TTL_IN_SEC = 60L * 24 * 60 * 3;  // 3 days
 
-	private static final String SEP = ":";  // WARNING!!! Never modify
+	private static final String SEP = ":";
 	private final String keyPrefix;
 	private final StringRedisTemplate writableTemplate;
 	private final StringRedisTemplate readableTemplate;

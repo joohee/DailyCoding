@@ -2,6 +2,7 @@ package net.joey.prototype.redis;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import net.joey.prototype.config.RedisPropertiesConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -15,9 +16,8 @@ import redis.clients.jedis.JedisPoolConfig;
 import javax.inject.Inject;
 
 @Component
+@Slf4j
 public class CustomJedisConnectionFactory implements InitializingBean {
-	private final Logger logger = LoggerFactory.getLogger(getClass());
-
 	public static final String REDISKEY_SAMPLE = "sample:";
 
 	@Inject
@@ -40,7 +40,7 @@ public class CustomJedisConnectionFactory implements InitializingBean {
 		_masterJedisConnectionFactory = createJedisConnectionFactory(config.getServers().get("master"), config.getMasterPoolConfig());
 
 		String ec2AvailabilityZone = environment.getProperty("EC2_AZ");
-		logger.info("ec2AvailabilityZone = {}", ec2AvailabilityZone);
+		log.info("ec2AvailabilityZone = {}", ec2AvailabilityZone);
 
 		String secondaryHostName = null;
 		if (StringUtils.isNotEmpty(ec2AvailabilityZone)) {
@@ -73,7 +73,7 @@ public class CustomJedisConnectionFactory implements InitializingBean {
 		jedisConnectionFactory.setUsePool(true);
 		jedisConnectionFactory.afterPropertiesSet();
 
-		logger.warn("Redis-connection-factory for {} = host:{}, port:{}, pool-config:{}", hostWithOptionalPort,
+		log.warn("Redis-connection-factory for {} = host:{}, port:{}, pool-config:{}", hostWithOptionalPort,
 				jedisConnectionFactory.getHostName(), jedisConnectionFactory.getPort(), inspectForInfo(jedisConnectionFactory.getPoolConfig()));
 
 		return jedisConnectionFactory;
@@ -83,7 +83,7 @@ public class CustomJedisConnectionFactory implements InitializingBean {
 		try {
 			return objectMapper.writeValueAsString(config);
 		} catch (JsonProcessingException e) {
-			logger.error("on inspecting a object", e);
+			log.error("on inspecting a object", e);
 			return config.toString();
 		}
 	}

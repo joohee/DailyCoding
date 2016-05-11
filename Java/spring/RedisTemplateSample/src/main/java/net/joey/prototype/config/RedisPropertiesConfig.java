@@ -7,9 +7,6 @@ import redis.clients.jedis.JedisPoolConfig;
 
 import java.util.Map;
 
-/**
- * Created by joey on 2015. 4. 24..
- */
 @Configuration
 @ConfigurationProperties("redis")
 @Data

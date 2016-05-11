@@ -1,6 +1,10 @@
 import unittest
 
 class TestStringMethods(unittest.TestCase):
+    ''' unittest.TestCase 를 이용하여 UnitTest를 시행합니다.
+
+        아래 function들은 사용 에제입니다.
+    '''
 
     def test_upper(self):
         self.assertEqual('foo'.upper(), 'FOO')

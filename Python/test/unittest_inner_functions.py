@@ -1,6 +1,10 @@
 import unittest
 
 class InnerFunctionsTestCase(unittest.TestCase):
+    '''숫자 및 String에 대한 예제를 생성하여 실행합니다. 
+
+        uniitest.main() function을 통해 실행합니다. 
+    '''
 
     def test_abs(self):
         plusNum = 3

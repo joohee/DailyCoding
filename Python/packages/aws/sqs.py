@@ -2,8 +2,19 @@ import boto3
 import json
 import datetime
 
+""" Amazon SQS 를 이용한 예제를 나타냅니다. 
+
+   도움말을 보려면 아래 명령어를 입력하세요.
+        pydoc sqs
+
+
+"""
 class SQSObject:
-    ''' boto3 을 통해 SQS를 이용한 기능이 포함된 Class입니다. 
+    """ boto3 을 통해 SQS를 이용한 기능이 포함된 Class입니다. 
+        
+        도움말을 html 파일로 생성하려면 아래 명령어를 입력하세요. 
+            pydoc -w sqs
+    
 
         Init: 
             profile_name이 필요합니다. 일반적으로 ~/.aws/credentials에 추가하여 사용합니다.
@@ -21,7 +32,11 @@ class SQSObject:
 
             http://boto3.readthedocs.org/en/latest/reference/services/sqs.html#SQS.Client.delete_message
 
-    '''
+        Exceptions: 
+            botocore.exceptions.ClientError: An error occurred (InvalidClientTokenId) when calling the ListQueues operation: The security token included in the request is invalid.
+            위와 같은 에러 메세지가 발생할 경우, ~/.aws/credentials 에 등록된 accessKey/secretKey가 유효하지 않기 때문입니다. 
+            따라서 적절한 키가 설정 되었는지 확인해야 합니다. 
+   """ 
     
     def __init__(self, profile_name):
         self.session = boto3.Session(profile_name=profile_name)

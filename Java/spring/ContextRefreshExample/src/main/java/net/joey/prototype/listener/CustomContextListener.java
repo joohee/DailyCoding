@@ -5,9 +5,6 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by a1100007 on 2016. 5. 2..
- */
 @Component
 @Slf4j
 public class CustomContextListener implements ApplicationListener<ContextRefreshedEvent> {

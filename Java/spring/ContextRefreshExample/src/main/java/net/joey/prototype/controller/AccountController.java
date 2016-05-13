@@ -21,9 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
-/**
- * Created by skplanet on 14. 12. 19..
- */
 @Controller
 @Api(value = "account", description = "apis for accounts")
 public class AccountController {

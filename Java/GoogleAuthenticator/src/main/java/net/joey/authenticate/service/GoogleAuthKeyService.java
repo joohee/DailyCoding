@@ -12,9 +12,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Random;
 
-/**
- * Created by a1001962 on 2016. 4. 5..
- */
 @Service
 @Slf4j
 public class GoogleAuthKeyService {

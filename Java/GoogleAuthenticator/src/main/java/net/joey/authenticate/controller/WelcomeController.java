@@ -12,9 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Created by skplanet on 14. 12. 19..
- */
 @Controller
 @Api(value = "welcome", description = "test APIs")
 @Slf4j

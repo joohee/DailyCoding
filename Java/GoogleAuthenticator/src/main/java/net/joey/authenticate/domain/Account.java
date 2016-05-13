@@ -5,10 +5,6 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by skplanet on 14. 12. 19..
- */
-@Data
 @Entity
 public class Account {
 

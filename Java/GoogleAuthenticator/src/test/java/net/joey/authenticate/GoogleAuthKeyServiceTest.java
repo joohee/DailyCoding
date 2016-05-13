@@ -1,7 +1,4 @@
 package net.joey.authenticate;
-/**
- * Created by a1001962 on 2016. 4. 5..
- */
 
 import lombok.extern.slf4j.Slf4j;
 import net.joey.authenticate.domain.AuthResponse;
@@ -44,7 +41,7 @@ public class GoogleAuthKeyServiceTest {
     @Test
     public void testCheckCode() {
         //String encodedUrlForBarcode = "http://chart.apis.google.com/chart?cht=qr&amp;chs=300x300&amp;" +
-//                "chl=otpauth://totp/username@test.hotzil.com%3Fsecret%3D6OJ5EJ72&amp;chld=H|0";
+//                "chl=otpauth://totp/username@test.domain.com%3Fsecret%3D6OJ5EJ72&amp;chld=H|0";
         String encodedKey = "2AMJNXHE";
         String userCode = "895313";
         long l = new Date().getTime();

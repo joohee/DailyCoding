@@ -9,9 +9,6 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.inject.Inject;
 
-/**
- * Created by skplanet on 15. 1. 16..
- */
 @Configuration
 @EnableSwagger
 public class SwaggerConfig {

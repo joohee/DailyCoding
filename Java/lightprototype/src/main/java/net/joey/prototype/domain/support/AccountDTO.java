@@ -6,9 +6,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
-/**
- * Created by skplanet on 14. 12. 29..
- */
 @Data
 public class AccountDTO {
 

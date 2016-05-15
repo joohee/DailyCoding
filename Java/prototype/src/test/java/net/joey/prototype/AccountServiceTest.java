@@ -25,9 +25,6 @@ import javax.transaction.Transactional;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by skplanet on 14. 12. 26..
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = Application.class, loader = SpringApplicationContextLoader.class)
 @Transactional

@@ -7,9 +7,6 @@ import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
-/**
- * Created by skplanet on 15. 1. 5..
- */
 public class ChatServerHandler extends SimpleChannelInboundHandler<String>{
     static final ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     private ObjectMapper mapper = new ObjectMapper();

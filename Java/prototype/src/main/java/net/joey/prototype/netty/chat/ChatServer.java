@@ -7,9 +7,6 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
-/**
- * Created by skplanet on 15. 1. 5..
- */
 public class ChatServer {
     private final int port;
     public ChatServer(int port) {

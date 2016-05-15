@@ -9,9 +9,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
-/**
- * Created by skplanet on 15. 1. 5..
- */
 public class DiscardServer {
 
     private int port;

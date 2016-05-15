@@ -11,9 +11,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Created by skplanet on 14. 12. 31..
- */
 @Service
 @Slf4j
 public class YoutubeService {

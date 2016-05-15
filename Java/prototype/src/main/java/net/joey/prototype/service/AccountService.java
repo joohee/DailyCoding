@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.util.Date;
 
-/**
- * Created by skplanet on 14. 12. 19..
- */
 @Service
 @Slf4j
 public class AccountService {

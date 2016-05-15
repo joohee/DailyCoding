@@ -21,9 +21,6 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by skplanet on 14. 12. 31..
- */
 @Service
 @Slf4j
 public class YoutubeCrawler {

@@ -15,9 +15,9 @@ configure(allprojects) {
 
 buildscript {
     repositories {
+        maven { url 'http://repo.springsource.org/plugins-release' }
         mavenCentral()
         jcenter()
-        maven { url 'http://repo.springsource.org/plugins-release' }
     }
     dependencies {
         classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
@@ -25,10 +25,9 @@ buildscript {
 }
 
 repositories {
+    maven { url 'http://repo.springsource.org/plugins-release' }
     mavenCentral()
     jcenter()
-    maven { url "http://oss.jfrog.org/artifactory/oss-release-local" }
-    maven { url 'http://repo.springsource.org/plugins-release' }
 }
 
 dependencies {

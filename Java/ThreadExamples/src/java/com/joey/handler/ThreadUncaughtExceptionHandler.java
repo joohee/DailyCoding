@@ -10,7 +10,7 @@ package com.joey.handler;
 public class ThreadUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
     @Override
     public void uncaughtException(Thread t, Throwable e) {
-        System.out.println("error occured..." +  t.getName() + ", " + e.getClass().getSimpleName());
+        System.out.println("error occurred..." +  t.getName() + ", " + e.getClass().getSimpleName());
         e.printStackTrace();
     }
 }

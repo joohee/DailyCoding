@@ -1,6 +1,6 @@
 package com.joey.execute;
 
-import com.joey.ThreadUncaughtExceptionHandler;
+import com.joey.handler.ThreadUncaughtExceptionHandler;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -11,17 +11,18 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created with ThreadExamples.
  * User: neigie
  * Date: 2016. 3. 6.
- * Time: 13:06
+ * Time: 13:13
  * To change this template use File | Settings | File Templates.
  */
-public class FixedThreadPoolExecutorSample {
+public class CachedThreadPoolExecutorSample {
 
     public static void main(String[] args) {
-        ExecutorService executorService = Executors.newFixedThreadPool(5, new ThreadFactory() {
+        // CachedThreadPool - no limit to create Thread.
+        ExecutorService executorService = Executors.newCachedThreadPool(new ThreadFactory() {
             private final AtomicInteger threadNumber = new AtomicInteger(1);
             @Override
             public Thread newThread(Runnable r) {
-                Thread t = new Thread(r, "fixed-thread-" + threadNumber.getAndIncrement());
+                Thread t = new Thread(r, "thread-id-" + threadNumber.getAndIncrement());
                 t.setDaemon(false);
                 t.setPriority(Thread.NORM_PRIORITY);
                 t.setUncaughtExceptionHandler(new ThreadUncaughtExceptionHandler());

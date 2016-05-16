@@ -1,6 +1,6 @@
 package com.joey.execute;
 
-import com.joey.ThreadUncaughtExceptionHandler;
+import com.joey.handler.ThreadUncaughtExceptionHandler;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

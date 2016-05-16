@@ -1,5 +1,7 @@
 package com.joey;
 
+import com.joey.handler.ThreadUncaughtExceptionHandler;
+
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -21,6 +23,11 @@ public class ThreadExample {
 
     public static void main(String[] args) {
         executor.execute(() -> {
+            try {
+                Thread.sleep(1000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             throw new RuntimeException();
         });
     }

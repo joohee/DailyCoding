@@ -15,6 +15,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.inject.Inject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.fest.assertions.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -37,5 +40,24 @@ public class SampleRedisStoreTest {
 
 		String returnValue = connectionFactory.sampleRedisStore().get(sampleKey);
 		assertThat(sampleValue.equals(returnValue)).isTrue();
+	}
+
+	@Test
+	public void testMultiAddAndMultiGet() {
+		String prefix = "prefix_";
+		List<String> keys = new ArrayList<>(10);
+		for (int i = 0; i < 10; i++) {
+			String key = prefix + i;
+			keys.add(key);
+
+			connectionFactory.sampleRedisStore().add(key, String.valueOf(i));
+		}
+
+		List<String> values = connectionFactory.sampleRedisStore().get(keys);
+		assertThat(values.size()).isEqualTo(keys.size());
+
+		for (int i = 0; i < 10; i++) {
+			assertThat(values.get(i)).isEqualTo(String.valueOf(i));
+		}
 	}
 }

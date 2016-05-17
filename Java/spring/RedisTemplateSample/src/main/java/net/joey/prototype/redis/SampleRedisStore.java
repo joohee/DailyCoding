@@ -43,7 +43,7 @@ public class SampleRedisStore {
 			rawKeys.add(getKeyFor(key));
 		}
 
-		List<String> values = this.readableTemplate.opsForValue().multiGet(keys);
+		List<String> values = this.readableTemplate.opsForValue().multiGet(rawKeys);
 		return values.stream().filter(v -> {
 			if (v != null) {
 				return true;

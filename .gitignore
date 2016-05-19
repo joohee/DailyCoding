@@ -77,3 +77,7 @@ xcuserdata/
 
 **/fastlane/report.xml
 **/fastlane/screenshots
+
+**/classes/*
+**/.gradle/*
+**/gradle*

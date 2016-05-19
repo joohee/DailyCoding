@@ -16,7 +16,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import javax.inject.Inject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -59,5 +61,28 @@ public class SampleRedisStoreTest {
 		for (int i = 0; i < 10; i++) {
 			assertThat(values.get(i)).isEqualTo(String.valueOf(i));
 		}
+	}
+
+	@Test
+	public void testMultiAddAtOnce() {
+		String prefix = "prefix__";
+		Map<String, String> tuples = new HashMap<>();
+
+		for (int i = 0; i < 10; i++) {
+			String key = prefix+i;
+			String value = String.valueOf(i);
+
+			tuples.put(key, value);
+		}
+
+		boolean resultForAdd = connectionFactory.sampleRedisStore().add(tuples);
+		assertThat(resultForAdd).isTrue();
+
+
+		List<String> values = connectionFactory.sampleRedisStore().get(tuples.keySet());
+		assertThat(values.size()).isEqualTo(tuples.values().size());
+
+		log.info("values: {}", values);
+
 	}
 }

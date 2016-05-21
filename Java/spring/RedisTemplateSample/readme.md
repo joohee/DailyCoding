@@ -1,4 +1,24 @@
-### VTF-API sample project
+### RedisTemplateExample project
+
+#### features
+- Spring-Redis에서 제공하는 StringRedisTemplate 사용 예시. 
+  - StringRedisTemplate에서 제공하는 operations 는 아래와 같다. 
+```
+  ValueOperations - Strings
+  BoundValueOperations - String bound to the given key.
+  ListOperations - List
+  BoundListOperations - List bound to the given key.
+  SetOperaions - Set
+  BoundSetOperations - Set bound to the given key.
+  ZSetOperations - a.k.a Sorted Set
+  BoundZSetOperations - Sorted Set bound to the given key.
+  HashOperations - Hash
+  BoundHashOperations - Hash bound to the given key.
+```
+
+#### references
+- http://redis.io/
+- http://docs.spring.io/spring-data/redis/docs/current/reference/html/
 
 #### structure
 - JDK 1.8

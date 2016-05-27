@@ -16,9 +16,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
-/**
- * Created by a1100007 on 2016. 5. 26..
- */
 @Component
 @Slf4j
 public class MySQLBinLogReader {

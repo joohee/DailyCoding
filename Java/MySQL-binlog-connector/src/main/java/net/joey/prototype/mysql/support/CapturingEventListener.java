@@ -23,9 +23,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * @author <a href="mailto:stanley.shyiko@gmail.com">Stanley Shyiko</a>
- */
 public class CapturingEventListener implements BinaryLogClient.EventListener {
 
     private final List<Event> events = new LinkedList<Event>();

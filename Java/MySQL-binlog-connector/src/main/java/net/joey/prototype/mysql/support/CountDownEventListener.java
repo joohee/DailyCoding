@@ -25,9 +25,6 @@ import java.util.Map;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * @author <a href="mailto:stanley.shyiko@gmail.com">Stanley Shyiko</a>
- */
 public class CountDownEventListener implements BinaryLogClient.EventListener {
 
     private final Map<EventType, AtomicInteger> countersByType = new HashMap<EventType, AtomicInteger>();

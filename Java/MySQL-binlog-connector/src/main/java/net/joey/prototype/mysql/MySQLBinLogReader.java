@@ -35,15 +35,14 @@ public class MySQLBinLogReader {
 
 	private static final String SUB_DELIM = ":";
 
-	private ExecutorService executorService = Executors.newCachedThreadPool(new ThreadFactory() {
-		@Override
-		public Thread newThread(Runnable r) {
-			Thread thread = new Thread(r);
-			thread.setDaemon(true);
-			thread.setName("MySQLBinLogThread");
-			thread.setPriority(Thread.NORM_PRIORITY);
-			return thread;
-		}
+	private static final long THREAD_SLEEP_TIME = 3000L;
+
+	private ExecutorService executorService = Executors.newCachedThreadPool(runnable -> {
+		Thread thread = new Thread(runnable);
+		thread.setDaemon(true);
+		thread.setName("MySQLBinLogThread");
+		thread.setPriority(Thread.NORM_PRIORITY);
+		return thread;
 	});
 
 	@EventListener
@@ -61,35 +60,32 @@ public class MySQLBinLogReader {
 
 		log.info(binaryLogClient.toString());
 
-		executorService.execute(new Runnable() {
-			@Override
-			public void run() {
-				while (!Thread.interrupted()) {
-					log.info("Thread lives...");
+		executorService.execute(() -> {
+			while (!Thread.interrupted()) {
+				log.info("Thread lives...");
+				try {
+					binaryLogClient.connect();
+				} catch (IOException e) {
+					e.printStackTrace();
+					// restart?
 					try {
-						binaryLogClient.connect();
-					} catch (IOException e) {
-						e.printStackTrace();
-						// restart?
-						try {
-							binaryLogClient.disconnect();
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
+						binaryLogClient.disconnect();
+					} catch (IOException e1) {
+						e1.printStackTrace();
 					}
 				}
+			}
 
-				if (Thread.interrupted()) {
-					try {
-						Thread.sleep(3000L);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					try {
-						binaryLogClient.connect();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+			if (Thread.interrupted()) {
+				try {
+					Thread.sleep(THREAD_SLEEP_TIME);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				try {
+					binaryLogClient.connect();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 			}
 		});

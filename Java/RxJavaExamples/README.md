@@ -21,5 +21,7 @@
 17:25:58.650 [main] INFO  com.joey.RxJavaExample - Hello: A
 17:25:58.654 [main] INFO  com.joey.RxJavaExample - Hello: B
 17:25:58.654 [main] INFO  com.joey.RxJavaExample - Hello: C
-
 ```
+
+### Reference
+- https://github.com/ReactiveX/RxJava/wiki/How-To-Use-RxJava

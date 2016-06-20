@@ -1,15 +1,25 @@
-## Thread Examples
+## RxJava Examples
 
-1. Catch Exceptions in Thread. 
-- use UncaughtExceptionHandler
+- Usage of RxJava (by Netflix)
 
-### result
+### Example
 ```
-error occured...thread-0, RuntimeException
-java.lang.RuntimeException
-    at com.joey.ThreadExample.lambda$main$1(ThreadExample.java:27)
-    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-    at java.lang.Thread.run(Thread.java:745)
+    public static void main(String[] args) {
+        hello("A", "B", "C");
+    }
+
+    public static void hello(String ...names) {
+        Observable.from(names).subscribe(s -> {
+            logger.info("Hello: " + s);
+        });
+    }
+
+```
+
+### Result
+```
+17:25:58.650 [main] INFO  com.joey.RxJavaExample - Hello: A
+17:25:58.654 [main] INFO  com.joey.RxJavaExample - Hello: B
+17:25:58.654 [main] INFO  com.joey.RxJavaExample - Hello: C
 
 ```
